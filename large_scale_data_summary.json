@@ -1,0 +1,210 @@
+{
+  "generation_timestamp": "2025-09-29 01:04:46",
+  "simulation_period": {
+    "start_date": "2024-01-01",
+    "end_date": "2025-01-31",
+    "total_days": 396
+  },
+  "fleet_configuration": {
+    "total_trains": 24,
+    "train_ids": [
+      "CR101",
+      "CR102",
+      "CR103",
+      "CR104",
+      "CR105",
+      "CR106",
+      "CR107",
+      "CR108",
+      "CR109",
+      "CR110",
+      "CR111",
+      "CR112",
+      "CR113",
+      "CR114",
+      "CR115",
+      "CR116",
+      "CR117",
+      "CR118",
+      "CR119",
+      "CR120",
+      "CR121",
+      "CR122",
+      "CR123",
+      "CR124"
+    ]
+  },
+  "dataset_statistics": {
+    "fitness_certificates": {
+      "total_records": 316,
+      "columns": [
+        "Certificate_ID",
+        "Train_ID",
+        "Department",
+        "Issue_Date",
+        "Expiry_Date",
+        "Validity_Days",
+        "Status",
+        "Inspector",
+        "Priority",
+        "Inspection_Type",
+        "Cycle_Number",
+        "Compliance_Score",
+        "Notes"
+      ],
+      "date_range": "No date column",
+      "unique_trains": 24,
+      "memory_usage_mb": 0.2
+    },
+    "maximo_job_cards": {
+      "total_records": 1350,
+      "columns": [
+        "Work_Order_ID",
+        "Job_Number",
+        "Train_ID",
+        "Work_Type",
+        "Description",
+        "Priority",
+        "Status",
+        "Created_Date",
+        "Due_Date",
+        "Estimated_Hours",
+        "Actual_Hours",
+        "Assigned_Technician",
+        "Department",
+        "Cost_Estimate",
+        "Parts_Cost",
+        "Urgency_Score",
+        "Completion_Rate",
+        "Notes"
+      ],
+      "date_range": "No date column",
+      "unique_trains": 24,
+      "memory_usage_mb": 1.07
+    },
+    "iot_telemetry": {
+      "total_records": 140576,
+      "columns": [
+        "Train_ID",
+        "Timestamp",
+        "Date",
+        "Hour",
+        "Motor_Temperature_C",
+        "Motor_Current_A",
+        "Brake_Pressure_Bar",
+        "HVAC_Power_kW",
+        "Vibration_Level",
+        "Oil_Temperature_C",
+        "Health_Score",
+        "Train_Age_Months",
+        "Usage_Intensity",
+        "Operating_Hour",
+        "Season"
+      ],
+      "date_range": {
+        "start": "2024-01-01",
+        "end": "2025-01-20"
+      },
+      "unique_trains": 24,
+      "memory_usage_mb": 43.48
+    },
+    "mileage_balancing": {
+      "total_records": 1272,
+      "columns": [
+        "Train_ID",
+        "Date",
+        "Bogie_Usage_Pct",
+        "BrakePad_Usage_Pct",
+        "HVAC_Usage_Pct",
+        "Motor_Usage_Pct",
+        "Average_Usage_Pct",
+        "Critical_Components",
+        "Priority",
+        "Recommendation",
+        "Balancing_Score",
+        "Age_Factor",
+        "Maintenance_Due",
+        "Notes"
+      ],
+      "date_range": {
+        "start": "2024-01-22",
+        "end": "2025-01-20"
+      },
+      "unique_trains": 24,
+      "memory_usage_mb": 0.52
+    },
+    "branding_priorities": {
+      "total_records": 3088,
+      "columns": [
+        "Contract_ID",
+        "Train_ID",
+        "Advertiser",
+        "Date",
+        "Required_Hours",
+        "Actual_Service_Hours",
+        "Shortfall_Hours",
+        "Penalty_Incurred",
+        "Compliance_Percentage",
+        "Contract_Value",
+        "Priority",
+        "Revenue_Impact",
+        "Day_Of_Week",
+        "Month",
+        "Notes"
+      ],
+      "date_range": {
+        "start": "2024-01-01",
+        "end": "2025-01-20"
+      },
+      "unique_trains": 8,
+      "memory_usage_mb": 1.58
+    },
+    "cleaning_detailing_schedule": {
+      "total_records": 13012,
+      "columns": [
+        "Train_ID",
+        "Date",
+        "Cleaning_Type",
+        "Duration_Minutes",
+        "Cost",
+        "Staff_Assigned",
+        "Priority",
+        "Completion_Status",
+        "Quality_Score",
+        "Location",
+        "Shift",
+        "Notes"
+      ],
+      "date_range": {
+        "start": "2024-01-01",
+        "end": "2025-01-20"
+      },
+      "unique_trains": 24,
+      "memory_usage_mb": 6.45
+    },
+    "stabling_geometry": {
+      "total_records": 24,
+      "columns": [
+        "Train_ID",
+        "Current_Bay",
+        "Current_Bay_Type",
+        "Accessibility_Score",
+        "Exit_Time_Minutes",
+        "Shunting_Moves_Required",
+        "Shunting_Time_Minutes",
+        "Tomorrow_Status",
+        "Optimal_Bay_Type",
+        "Needs_Reallocation",
+        "Reallocation_Priority",
+        "Energy_Cost_Estimate",
+        "Capacity_Utilization",
+        "Safety_Score",
+        "Distance_To_Workshop",
+        "Notes"
+      ],
+      "date_range": "No date column",
+      "unique_trains": 24,
+      "memory_usage_mb": 0.01
+    }
+  }
+}

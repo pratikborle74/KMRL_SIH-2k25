@@ -1,0 +1,11 @@
+KMRL JOB CARD
+---------------------------------
+Work Order ID: WO-004
+Train ID:      CR120
+Date Created:  2025-09-24
+---------------------------------
+Work Type:     Corrective
+Priority:      High
+Status:        Open
+Est. Hours:    12
+---------------------------------

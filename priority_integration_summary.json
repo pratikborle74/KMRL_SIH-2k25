@@ -1,0 +1,12 @@
+{
+  "analysis_timestamp": "2025-09-19 22:33:02",
+  "total_trains": 24,
+  "priority_distribution": {
+    "Low": 12,
+    "High": 8,
+    "Medium": 3,
+    "Critical": 1
+  },
+  "high_priority_trains": 9,
+  "average_priority_score": 28.3
+}

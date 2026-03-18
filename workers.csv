@@ -1,0 +1,25 @@
+Worker ID,Name,Age,Gender,Station Assigned,Shift Timing,Duties,Supervisor,Contact Number,Employment Status,Induction Status,Inspection Slot,Inspection Outcome,Availability,Task,Task Time (mins)
+W001,John Doe,34,Male,Aluva,6:00 AM - 2:00 PM,Cleaning and sanitizing,Ramesh Kumar,9876543210,Full-time,Completed,9:00 AM - 11:00 AM,Pass,No,sweeping,20
+W002,Mary Thomas,29,Female,Edappally,2:00 PM - 10:00 PM,Dusting and mopping,Arun Nair,9988776655,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W003,Suresh Kumar,45,Male,Palarivattom,6:00 AM - 2:00 PM,Trash collection,Ramesh Kumar,9876543240,Part-time,Pending,9:00 AM - 11:00 AM,Pending,Yes,,
+W004,Meera Raj,38,Female,Vyttila,10:00 AM - 6:00 PM,Train interior cleaning,Arun Nair,9888776677,Full-time,Completed,9:00 AM - 11:00 AM,Pass,No,sweeping,20
+W005,Vijay Nair,41,Male,MG Road,2:00 PM - 10:00 PM,Sweeping and mopping,Ramesh Kumar,9876543211,Full-time,Pending,9:00 AM - 11:00 AM,Pending,Yes,,
+W006,Anjali Nair,30,Female,Kadavanthra,6:00 AM - 2:00 PM,Cleaning and sanitizing,Arun Nair,9998887777,Part-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W007,Rajesh Kumar,50,Male,Pathadipalam,10:00 AM - 6:00 PM,Trash collection,Ramesh Kumar,9888776666,Full-time,Pending,9:00 AM - 11:00 AM,Pending,Yes,,
+W008,Shilpa Menon,28,Female,Kochi Metro Station,2:00 PM - 10:00 PM,Sweeping and mopping,Arun Nair,9888778888,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,0
+W009,Sanjay Nair,36,Male,Aluva,6:00 AM - 2:00 PM,Cleaning and sanitizing,Ramesh Kumar,9876543212,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W010,Rina Raj,27,Female,Edappally,10:00 AM - 6:00 PM,Dusting and mopping,Arun Nair,9888777777,Part-time,Pending,9:00 AM - 11:00 AM,Pending,Yes,,
+W011,Vishnu Kumar,43,Male,Palarivattom,2:00 PM - 10:00 PM,Trash collection,Ramesh Kumar,9876543234,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W012,Amina Khader,33,Female,Vyttila,6:00 AM - 2:00 PM,Window and glass cleaning,Arun Nair,9888776654,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W013,Gopakumar,39,Male,Kadavanthra,6:00 AM - 2:00 PM,Sweeping and mopping,Ramesh Kumar,9888777765,Full-time,Pending,9:00 AM - 11:00 AM,Pending,Yes,,
+W014,Neethu Raj,26,Female,MG Road,10:00 AM - 6:00 PM,Cleaning and sanitizing,Arun Nair,9998887788,Part-time,Pending,9:00 AM - 11:00 AM,Pending,Yes,,
+W015,Arun Kumar,44,Male,Pathadipalam,6:00 AM - 2:00 PM,Trash collection,Ramesh Kumar,9888776699,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W016,Priya Nair,32,Female,Kochi Metro Station,2:00 PM - 10:00 PM,Sweeping and mopping,Arun Nair,9998887770,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W017,Amal Suresh,41,Male,Aluva,2:00 PM - 10:00 PM,Dusting and mopping,Ramesh Kumar,9876543213,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W018,Manju Raj,37,Female,Edappally,6:00 AM - 2:00 PM,Cleaning and sanitizing,Arun Nair,9888776670,Part-time,Pending,9:00 AM - 11:00 AM,Pending,Yes,,
+W019,Anoop Nair,40,Male,Palarivattom,10:00 AM - 6:00 PM,Trash collection,Ramesh Kumar,9876543214,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W020,Devika Menon,29,Female,Vyttila,2:00 PM - 10:00 PM,Sweeping and mopping,Arun Nair,9888777766,Full-time,Pending,9:00 AM - 11:00 AM,Pending,Yes,,
+W021,Nandu Kumar,33,Male,Kadavanthra,6:00 AM - 2:00 PM,Floor and seat cleaning,Ramesh Kumar,9998887780,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W022,Priyanka Raju,30,Female,MG Road,2:00 PM - 10:00 PM,Dusting and mopping,Arun Nair,9888777770,Part-time,Pending,9:00 AM - 11:00 AM,Pending,Yes,,
+W023,Santhosh Nair,46,Male,Pathadipalam,10:00 AM - 6:00 PM,Trash collection,Ramesh Kumar,9876543235,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,
+W024,Shweta Menon,36,Female,Kochi Metro Station,6:00 AM - 2:00 PM,Cleaning and sanitizing,Arun Nair,9888776660,Full-time,Completed,9:00 AM - 11:00 AM,Pass,Yes,,

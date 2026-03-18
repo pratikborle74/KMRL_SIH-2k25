@@ -1,0 +1,25 @@
+Train_ID,Record_Date,Current_Bay,Current_Bay_Type,Accessibility_Score,Exit_Time_Minutes,Shunting_Moves_Required,Shunting_Time_Minutes,Tomorrow_Status,Optimal_Bay_Type,Needs_Reallocation,Reallocation_Priority,Energy_Cost_Estimate,Capacity_Utilization,Safety_Score,Distance_To_Workshop,Weather_Impact,Traffic_Density,Maintenance_Window,Driver_Availability,Track_Condition,Equipment_Status,Cost_Per_Hour,Efficiency_Rating,Notes
+CR101,2025-01-10,SB-1,Standard_Stabling,3,25,2,15,Service,Standard_Stabling,False,Low,450,0.75,88.5,200,Medium,Low,True,Available,Good,Operational,450.0,75.0,Standard stabling for CR101
+CR102,2025-01-10,SB-2,Standard_Stabling,3,28,1,10,Service,Standard_Stabling,False,Low,420,0.72,89.2,180,Medium,Low,True,Available,Good,Operational,420.0,78.0,Standard stabling for CR102
+CR103,2025-01-10,SB-3,Standard_Stabling,2,30,2,18,Maintenance,IBL_Maintenance,True,Medium,520,0.68,85.1,150,High,Medium,False,Limited,Fair,Maintenance,520.0,65.0,Needs reallocation to maintenance
+CR104,2025-01-10,SB-4,Standard_Stabling,3,22,1,8,Service,Standard_Stabling,False,Low,380,0.80,90.5,220,Low,Low,True,Available,Excellent,Operational,380.0,82.0,Standard stabling for CR104
+CR105,2025-01-10,SB-5,Standard_Stabling,2,35,3,25,Maintenance,IBL_Maintenance,True,High,580,0.65,82.8,120,High,High,False,Critical,Fair,Maintenance,580.0,60.0,Critical maintenance needed
+CR106,2025-01-10,IBL-1,IBL_Maintenance,5,20,1,12,Maintenance,IBL_Maintenance,False,Low,350,0.85,92.0,50,Medium,Medium,True,Available,Excellent,Maintenance,350.0,85.0,In maintenance bay
+CR107,2025-01-10,IBL-2,IBL_Maintenance,5,18,1,10,Heavy_Maintenance,Heavy_Maintenance,True,Medium,680,0.82,91.5,45,Medium,Medium,False,Limited,Good,Repair,680.0,70.0,Scheduled for heavy maintenance
+CR108,2025-01-10,IBL-3,IBL_Maintenance,4,25,2,15,Inspection,IBL_Maintenance,False,Low,400,0.78,88.9,60,Low,Low,True,Available,Good,Maintenance,400.0,80.0,Regular maintenance
+CR109,2025-01-10,HM-1,Heavy_Maintenance,4,45,3,35,Heavy_Maintenance,Heavy_Maintenance,False,Low,850,0.70,85.2,25,Medium,High,False,Limited,Fair,Repair,850.0,55.0,Heavy maintenance in progress
+CR110,2025-01-10,HM-2,Heavy_Maintenance,3,50,4,40,Heavy_Maintenance,Heavy_Maintenance,False,Low,920,0.65,83.8,30,High,High,False,Critical,Fair,Repair,920.0,50.0,Major overhaul
+CR111,2025-01-10,RB-1,Standby_Ready,5,5,0,0,Service,Standby_Ready,False,Low,200,0.95,95.0,300,Low,Low,True,Available,Excellent,Operational,200.0,98.0,Ready for immediate service
+CR112,2025-01-10,RB-2,Standby_Ready,5,3,0,0,Service,Standby_Ready,False,Low,180,0.98,96.5,320,Low,Low,True,Available,Excellent,Operational,180.0,99.0,Standby ready
+CR113,2025-01-10,RB-3,Standby_Ready,4,8,1,5,Service,Standby_Ready,False,Low,250,0.90,93.2,280,Medium,Low,True,Available,Good,Operational,250.0,95.0,Ready for service
+CR114,2025-01-10,CB-1,Cleaning_Bays,4,15,1,8,Cleaning,Cleaning_Bays,False,Low,300,0.88,87.5,400,Medium,Medium,True,Available,Good,Maintenance,300.0,88.0,Scheduled cleaning
+CR115,2025-01-10,SB-6,Standard_Stabling,3,27,2,20,Service,Standard_Stabling,False,Low,440,0.76,87.8,190,Medium,Low,True,Available,Good,Operational,440.0,76.0,Standard stabling
+CR116,2025-01-10,SB-7,Standard_Stabling,2,32,2,22,Service,Standard_Stabling,False,Low,460,0.73,86.2,210,Medium,Medium,True,Available,Fair,Operational,460.0,72.0,Standard stabling
+CR117,2025-01-10,SB-8,Standard_Stabling,3,26,1,12,Maintenance,IBL_Maintenance,True,Low,480,0.77,88.1,160,Medium,Low,False,Available,Good,Maintenance,480.0,74.0,Maintenance required
+CR118,2025-01-10,SB-9,Standard_Stabling,2,29,3,18,Service,Standard_Stabling,False,Low,420,0.74,87.3,195,Medium,Medium,True,Available,Good,Operational,420.0,75.0,Standard stabling
+CR119,2025-01-10,RB-4,Standby_Ready,5,6,0,0,Standby,Standby_Ready,False,Low,220,0.92,94.8,290,Low,Low,True,Available,Excellent,Operational,220.0,96.0,Standby position
+CR120,2025-01-10,IBL-4,IBL_Maintenance,4,22,1,14,Inspection,IBL_Maintenance,False,Low,380,0.81,90.3,55,Medium,Low,True,Available,Good,Maintenance,380.0,82.0,Routine inspection
+CR121,2025-01-10,SB-10,Standard_Stabling,3,24,1,9,Service,Standard_Stabling,False,Low,400,0.79,88.7,185,Medium,Low,True,Available,Good,Operational,400.0,77.0,Standard stabling
+CR122,2025-01-10,HM-3,Heavy_Maintenance,3,48,3,38,Testing,IBL_Maintenance,True,Medium,780,0.68,84.1,35,High,Medium,False,Limited,Fair,Repair,780.0,58.0,Post-maintenance testing
+CR123,2025-01-10,SB-11,Standard_Stabling,2,31,2,16,Service,Standard_Stabling,False,Low,450,0.71,86.9,205,Medium,Medium,True,Available,Fair,Operational,450.0,73.0,Standard stabling
+CR124,2025-01-10,CB-2,Cleaning_Bays,4,12,0,0,Service,Standby_Ready,True,Low,280,0.90,89.2,350,Low,Low,True,Available,Good,Operational,280.0,92.0,Cleaning completed

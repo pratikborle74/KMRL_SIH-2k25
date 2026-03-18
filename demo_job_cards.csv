@@ -1,0 +1,86 @@
+Job_Card_Number,Train_ID,Work_Type,Priority,Status,Created_Date,Estimated_Hours
+JC25795,CR101,Preventive,High,Open,2025-08-29,3.6
+JC92386,CR101,Inspection,Critical,Open,2025-09-15,3.4
+JC51090,CR101,Corrective,Critical,Open,2025-09-13,2.0
+JC93104,CR101,Corrective,Medium,Completed,2025-09-02,7.2
+JC28431,CR102,Inspection,Medium,Open,2025-08-31,5.8
+JC76803,CR102,Preventive,Critical,Open,2025-08-29,6.5
+JC97313,CR102,Preventive,Low,Open,2025-09-10,2.2
+JC33483,CR102,Inspection,Medium,Open,2025-09-16,11.1
+JC77121,CR103,Corrective,Medium,Completed,2025-09-15,3.8
+JC55758,CR103,Corrective,Low,In Progress,2025-09-15,8.0
+JC21534,CR103,Corrective,High,Completed,2025-09-11,10.4
+JC34300,CR103,Corrective,Medium,Completed,2025-08-25,4.8
+JC18571,CR103,Preventive,High,Open,2025-09-18,2.2
+JC72592,CR104,Inspection,Low,Open,2025-09-16,9.9
+JC22666,CR104,Preventive,Low,Open,2025-08-22,10.6
+JC88603,CR105,Corrective,Critical,Completed,2025-08-26,8.7
+JC94651,CR105,Corrective,Low,Completed,2025-09-14,11.7
+JC37266,CR105,Preventive,Low,Completed,2025-09-05,6.9
+JC10206,CR105,Inspection,High,Completed,2025-08-31,2.3
+JC64268,CR105,Corrective,High,Open,2025-09-04,9.6
+JC65820,CR106,Inspection,High,Completed,2025-09-17,8.2
+JC52557,CR106,Preventive,High,Completed,2025-09-07,3.9
+JC58925,CR106,Corrective,Medium,Open,2025-08-22,5.6
+JC33776,CR106,Preventive,High,Completed,2025-08-30,5.5
+JC19474,CR106,Inspection,High,Completed,2025-09-14,8.9
+JC76199,CR107,Inspection,High,Completed,2025-08-26,9.0
+JC64384,CR107,Corrective,Low,In Progress,2025-09-12,7.0
+JC33664,CR107,Preventive,High,Completed,2025-09-02,11.8
+JC10854,CR108,Preventive,Medium,Open,2025-09-17,7.3
+JC36309,CR108,Inspection,Medium,Open,2025-08-23,4.4
+JC47157,CR108,Preventive,Medium,Open,2025-09-08,10.2
+JC32671,CR108,Preventive,High,Completed,2025-09-03,2.4
+JC59811,CR108,Inspection,High,Open,2025-08-31,5.5
+JC93763,CR109,Preventive,Medium,Completed,2025-09-01,10.4
+JC11802,CR109,Preventive,High,In Progress,2025-09-09,4.6
+JC56843,CR109,Corrective,Low,Completed,2025-09-02,4.4
+JC30932,CR109,Preventive,Low,Completed,2025-09-10,5.5
+JC61407,CR110,Inspection,Low,Completed,2025-09-18,8.4
+JC22874,CR110,Preventive,High,Open,2025-08-30,7.8
+JC12557,CR110,Preventive,Medium,Completed,2025-09-05,7.5
+JC12869,CR110,Inspection,Medium,Completed,2025-09-18,2.2
+JC96831,CR110,Inspection,Low,Completed,2025-09-03,2.9
+JC55525,CR111,Inspection,High,Completed,2025-09-13,5.9
+JC86213,CR111,Inspection,Medium,Completed,2025-09-18,7.8
+JC15600,CR111,Preventive,High,Completed,2025-09-15,2.2
+JC83744,CR111,Corrective,Low,In Progress,2025-09-16,9.5
+JC28711,CR112,Preventive,Medium,In Progress,2025-09-16,11.8
+JC75726,CR112,Preventive,Medium,Open,2025-09-16,3.7
+JC42745,CR113,Inspection,Low,In Progress,2025-09-05,3.0
+JC82991,CR113,Inspection,Low,Completed,2025-08-23,5.0
+JC76320,CR114,Preventive,High,Open,2025-09-12,4.9
+JC29190,CR114,Corrective,Low,Open,2025-09-06,2.8
+JC99912,CR114,Preventive,High,Completed,2025-09-05,10.0
+JC97922,CR115,Inspection,Critical,Completed,2025-08-27,8.7
+JC62921,CR115,Inspection,Low,Open,2025-08-24,2.3
+JC80313,CR115,Corrective,Medium,Completed,2025-09-14,7.2
+JC29508,CR115,Preventive,Medium,Open,2025-08-30,6.1
+JC90738,CR115,Inspection,High,Completed,2025-09-01,7.2
+JC96672,CR116,Inspection,Medium,Open,2025-08-24,2.3
+JC18308,CR116,Corrective,Low,Open,2025-08-29,2.6
+JC26896,CR116,Inspection,High,Completed,2025-09-03,3.8
+JC13343,CR117,Preventive,Low,Completed,2025-08-28,9.3
+JC83666,CR117,Corrective,Medium,Open,2025-08-25,5.4
+JC64340,CR118,Inspection,Critical,Open,2025-08-30,3.8
+JC53919,CR118,Corrective,Low,Open,2025-09-15,3.7
+JC69101,CR118,Preventive,Medium,Open,2025-09-14,10.9
+JC50158,CR118,Corrective,Medium,Completed,2025-09-18,7.4
+JC26364,CR118,Inspection,Low,Open,2025-08-23,10.0
+JC82369,CR119,Inspection,Medium,Completed,2025-08-31,10.2
+JC48304,CR119,Corrective,High,Completed,2025-09-07,3.0
+JC22161,CR119,Preventive,Critical,Open,2025-09-02,8.6
+JC98668,CR119,Corrective,Medium,Completed,2025-08-31,4.8
+JC13267,CR119,Corrective,Medium,Open,2025-08-21,2.4
+JC70692,CR120,Preventive,High,Completed,2025-09-10,7.7
+JC93042,CR120,Corrective,High,Completed,2025-08-27,11.3
+JC54811,CR121,Preventive,Medium,Open,2025-09-16,3.0
+JC24397,CR121,Preventive,Medium,Open,2025-09-02,2.5
+JC82936,CR122,Inspection,Critical,Completed,2025-09-05,8.8
+JC42307,CR122,Inspection,Medium,Completed,2025-09-14,4.9
+JC21130,CR123,Preventive,Low,Open,2025-08-25,3.1
+JC99780,CR123,Corrective,Low,In Progress,2025-08-24,6.4
+JC84460,CR124,Inspection,Low,In Progress,2025-09-10,9.6
+JC82592,CR124,Preventive,Low,Completed,2025-09-11,2.7
+JC98858,CR124,Corrective,High,Completed,2025-09-13,11.9
+JC23807,CR124,Preventive,Medium,Open,2025-09-12,11.9

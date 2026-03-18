@@ -1,0 +1,16 @@
+=== SYSTEM DIAGNOSTIC REPORT ===
+Python Version: 3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]
+Matplotlib Version: 3.10.1
+Matplotlib Backend: Agg
+PIL Available: No
+MPL text.color: black
+MPL axes.labelcolor: black
+MPL figure.facecolor: white
+
+=== POTENTIAL WINDOWS ISSUES ===
+1. Windows Display Scaling (125%, 150%, etc.)
+2. Windows Night Light mode
+3. Windows HDR settings
+4. Graphics driver color management
+5. Monitor brightness/contrast too high
+6. Image viewer gamma correction

@@ -1,0 +1,82 @@
+Job_Card_Number,Train_ID,Work_Type,Priority,Status,Created_Date,Estimated_Hours,Description,Assigned_Technician
+JC92386,CR101,Emergency,Low,Completed,2025-03-24,2.9,Emergency maintenance for CR101,Tech11
+JC69735,CR101,Preventive,Medium,In Progress,2025-06-24,4.5,Preventive maintenance for CR101,Tech12
+JC38693,CR101,Preventive,High,Completed,2025-04-15,6.4,Preventive maintenance for CR101,Tech12
+JC69150,CR101,Corrective,High,Completed,2025-06-23,2.5,Corrective maintenance for CR101,Tech15
+JC51606,CR102,Overhaul,Medium,Completed,2025-07-31,71.6,Overhaul maintenance for CR102,Tech9
+JC33897,CR102,Inspection,Critical,Completed,2025-04-06,2.9,Inspection maintenance for CR102,Tech2
+JC90077,CR102,Corrective,High,In Progress,2025-06-28,5.2,Corrective maintenance for CR102,Tech17
+JC50757,CR103,Preventive,Medium,Completed,2025-08-01,8.4,Preventive maintenance for CR103,Tech18
+JC50397,CR103,Inspection,Low,Completed,2025-08-07,5.6,Inspection maintenance for CR103,Tech8
+JC48044,CR103,Corrective,Medium,Closed,2025-06-30,4.0,Corrective maintenance for CR103,Tech15
+JC58190,CR103,Overhaul,Critical,Open,2025-08-06,31.9,Overhaul maintenance for CR103,Tech11
+JC74505,CR103,Emergency,Low,In Progress,2025-07-01,7.6,Emergency maintenance for CR103,Tech9
+JC87373,CR104,Corrective,Low,Completed,2025-05-08,2.9,Corrective maintenance for CR104,Tech5
+JC18110,CR104,Preventive,Medium,Completed,2025-06-13,7.1,Preventive maintenance for CR104,Tech14
+JC10206,CR104,Corrective,Low,Open,2025-05-12,3.5,Corrective maintenance for CR104,Tech15
+JC64268,CR104,Preventive,Critical,Completed,2025-06-22,9.1,Preventive maintenance for CR104,Tech4
+JC91734,CR104,Corrective,Medium,Completed,2025-04-22,5.7,Corrective maintenance for CR104,Tech19
+JC79163,CR105,Inspection,Low,In Progress,2025-08-23,5.4,Inspection maintenance for CR105,Tech11
+JC76842,CR105,Inspection,Low,Completed,2025-05-15,1.6,Inspection maintenance for CR105,Tech13
+JC23545,CR105,Corrective,Critical,Completed,2025-09-17,2.1,Corrective maintenance for CR105,Tech12
+JC56576,CR106,Corrective,Medium,In Progress,2025-07-23,2.8,Corrective maintenance for CR106,Tech12
+JC36736,CR106,Preventive,Medium,Completed,2025-08-12,4.3,Preventive maintenance for CR106,Tech2
+JC56717,CR106,Preventive,Medium,Completed,2025-05-13,9.1,Preventive maintenance for CR106,Tech2
+JC22688,CR106,Overhaul,Medium,Completed,2025-07-29,60.3,Overhaul maintenance for CR106,Tech6
+JC32671,CR106,Overhaul,Medium,Completed,2025-08-27,69.0,Overhaul maintenance for CR106,Tech1
+JC82082,CR107,Corrective,Medium,Open,2025-05-19,2.6,Corrective maintenance for CR107,Tech3
+JC98614,CR107,Preventive,Medium,Open,2025-04-26,7.2,Preventive maintenance for CR107,Tech18
+JC70713,CR108,Emergency,Medium,Completed,2025-05-14,5.2,Emergency maintenance for CR108,Tech3
+JC12049,CR108,Inspection,Medium,Completed,2025-09-13,3.6,Inspection maintenance for CR108,Tech1
+JC17400,CR108,Corrective,Low,Open,2025-08-03,1.9,Corrective maintenance for CR108,Tech3
+JC22183,CR108,Inspection,Low,Open,2025-04-26,4.9,Inspection maintenance for CR108,Tech11
+JC12557,CR108,Inspection,High,In Progress,2025-05-30,1.0,Inspection maintenance for CR108,Tech3
+JC60108,CR109,Preventive,High,Completed,2025-06-19,7.6,Preventive maintenance for CR109,Tech9
+JC56214,CR109,Corrective,Critical,Completed,2025-04-12,2.8,Corrective maintenance for CR109,Tech3
+JC16893,CR110,Preventive,Medium,Completed,2025-05-15,6.1,Preventive maintenance for CR110,Tech6
+JC49790,CR110,Inspection,Medium,Completed,2025-06-03,2.8,Inspection maintenance for CR110,Tech1
+JC66491,CR111,Corrective,Medium,Open,2025-07-21,1.2,Corrective maintenance for CR111,Tech14
+JC10301,CR111,Emergency,Low,Closed,2025-05-26,4.0,Emergency maintenance for CR111,Tech3
+JC36641,CR112,Preventive,High,Open,2025-05-27,6.5,Preventive maintenance for CR112,Tech10
+JC21093,CR112,Corrective,Medium,Completed,2025-07-28,4.1,Corrective maintenance for CR112,Tech2
+JC88069,CR112,Inspection,Medium,In Progress,2025-05-16,4.5,Inspection maintenance for CR112,Tech16
+JC18716,CR112,Inspection,High,Open,2025-08-12,5.3,Inspection maintenance for CR112,Tech7
+JC86429,CR112,Preventive,Medium,Completed,2025-07-25,7.2,Preventive maintenance for CR112,Tech12
+JC62921,CR113,Preventive,Medium,Completed,2025-04-30,4.3,Preventive maintenance for CR113,Tech17
+JC90135,CR113,Preventive,Critical,Completed,2025-03-24,6.6,Preventive maintenance for CR113,Tech12
+JC79678,CR113,Preventive,Medium,Completed,2025-06-04,8.3,Preventive maintenance for CR113,Tech3
+JC96672,CR113,Preventive,High,Closed,2025-07-27,9.7,Preventive maintenance for CR113,Tech19
+JC99480,CR114,Preventive,Critical,Closed,2025-07-24,10.7,Preventive maintenance for CR114,Tech12
+JC30056,CR114,Preventive,High,Completed,2025-05-14,8.4,Preventive maintenance for CR114,Tech8
+JC69638,CR114,Corrective,Medium,In Progress,2025-05-26,3.2,Corrective maintenance for CR114,Tech3
+JC19435,CR114,Preventive,Medium,Completed,2025-07-06,6.7,Preventive maintenance for CR114,Tech5
+JC45247,CR114,Inspection,Critical,In Progress,2025-08-04,3.4,Inspection maintenance for CR114,Tech7
+JC78385,CR115,Corrective,Medium,Completed,2025-08-18,5.7,Corrective maintenance for CR115,Tech10
+JC61991,CR115,Inspection,Medium,In Progress,2025-04-26,1.8,Inspection maintenance for CR115,Tech16
+JC82369,CR115,Corrective,Critical,Open,2025-09-18,3.9,Corrective maintenance for CR115,Tech3
+JC48304,CR115,Inspection,High,Open,2025-05-19,4.1,Inspection maintenance for CR115,Tech8
+JC37350,CR115,Preventive,High,Completed,2025-07-08,7.0,Preventive maintenance for CR115,Tech17
+JC30358,CR116,Corrective,Medium,Completed,2025-09-12,2.3,Corrective maintenance for CR116,Tech4
+JC70692,CR116,Corrective,Medium,Open,2025-07-24,4.7,Corrective maintenance for CR116,Tech4
+JC27955,CR116,Corrective,Medium,Completed,2025-05-05,4.7,Corrective maintenance for CR116,Tech18
+JC81180,CR117,Inspection,Medium,Open,2025-06-16,3.1,Inspection maintenance for CR117,Tech3
+JC76234,CR117,Corrective,Medium,Completed,2025-06-07,2.9,Corrective maintenance for CR117,Tech19
+JC92637,CR118,Inspection,Critical,Completed,2025-06-12,2.6,Inspection maintenance for CR118,Tech19
+JC97508,CR118,Preventive,Critical,In Progress,2025-06-01,8.4,Preventive maintenance for CR118,Tech4
+JC98461,CR119,Preventive,Low,Open,2025-04-22,11.8,Preventive maintenance for CR119,Tech5
+JC33625,CR119,Preventive,Low,Completed,2025-04-10,5.1,Preventive maintenance for CR119,Tech12
+JC93460,CR120,Preventive,Medium,Completed,2025-09-13,11.1,Preventive maintenance for CR120,Tech5
+JC67854,CR120,Preventive,Low,Completed,2025-04-07,10.5,Preventive maintenance for CR120,Tech7
+JC36790,CR121,Preventive,Low,Completed,2025-08-06,10.2,Preventive maintenance for CR121,Tech10
+JC13709,CR121,Corrective,Medium,Completed,2025-06-22,3.0,Corrective maintenance for CR121,Tech8
+JC38016,CR122,Emergency,Medium,Completed,2025-05-16,7.8,Emergency maintenance for CR122,Tech1
+JC30559,CR122,Inspection,Medium,Closed,2025-04-07,3.8,Inspection maintenance for CR122,Tech11
+JC48413,CR123,Overhaul,Medium,Completed,2025-04-09,57.8,Overhaul maintenance for CR123,Tech15
+JC17114,CR123,Corrective,Low,Completed,2025-04-14,4.7,Corrective maintenance for CR123,Tech12
+JC39703,CR123,Inspection,Low,Completed,2025-07-08,4.1,Inspection maintenance for CR123,Tech4
+JC14835,CR123,Preventive,Medium,Completed,2025-06-22,6.9,Preventive maintenance for CR123,Tech17
+JC55445,CR123,Corrective,Medium,Completed,2025-04-12,1.7,Corrective maintenance for CR123,Tech18
+JC47892,CR124,Preventive,Low,Open,2025-08-04,8.4,Preventive maintenance for CR124,Tech1
+JC14158,CR124,Overhaul,Low,Completed,2025-05-25,55.6,Overhaul maintenance for CR124,Tech17
+JC39189,CR124,Corrective,Medium,Completed,2025-04-12,1.3,Corrective maintenance for CR124,Tech17
+JC14809,CR124,Inspection,Low,Completed,2025-06-17,4.6,Inspection maintenance for CR124,Tech10

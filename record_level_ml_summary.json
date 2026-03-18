@@ -1,0 +1,22 @@
+{
+  "training_timestamp": "2025-09-19 19:06:27",
+  "training_approach": "Individual record-level training",
+  "dataset_summary": {
+    "total_training_records": 18527,
+    "features": 15,
+    "target_distribution": {
+      "1": 11251,
+      "0": 7276
+    }
+  },
+  "model_performance": {
+    "best_model": "Gradient Boosting",
+    "accuracy": 1.0,
+    "accuracy_percentage": "100.00%"
+  },
+  "data_sources": [
+    "Job cards: 13994 records",
+    "Telemetry: 2778 records",
+    "Certificates: 1755 records"
+  ]
+}

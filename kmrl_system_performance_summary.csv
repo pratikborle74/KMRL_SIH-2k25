@@ -1,0 +1,2 @@
+Timestamp,Failure_Prediction_Accuracy,Optimization_Decision_Accuracy,Demand_Forecasting_Accuracy,Overall_System_Score,Production_Ready
+2025-09-20 12:11:19,98.6,100.0,50.0,82.86666666666666,True

@@ -1,0 +1,86 @@
+{
+    "timestamp": "2025-09-29T01:04:56.750085",
+    "system_health": false,
+    "checks": [
+        {
+            "component": "Data file: fitness_certificates.csv",
+            "status": "PASS",
+            "message": "File fitness_certificates.csv is valid (316 rows, 13 columns)"
+        },
+        {
+            "component": "Data file: maximo_job_cards.csv",
+            "status": "PASS",
+            "message": "File maximo_job_cards.csv is valid (1350 rows, 18 columns)"
+        },
+        {
+            "component": "Data file: stabling_geometry.csv",
+            "status": "PASS",
+            "message": "File stabling_geometry.csv is valid (24 rows, 16 columns)"
+        },
+        {
+            "component": "Data file: mileage_balancing.csv",
+            "status": "FAIL",
+            "message": "File mileage_balancing.csv is missing columns: Current_Mileage"
+        },
+        {
+            "component": "Data file: workers.csv",
+            "status": "FAIL",
+            "message": "File workers.csv is missing columns: Worker_ID"
+        },
+        {
+            "component": "Data file: iot_telemetry_data.csv",
+            "status": "FAIL",
+            "message": "File iot_telemetry_data.csv is missing columns: Sensor_Value"
+        },
+        {
+            "component": "Optimization results",
+            "status": "PASS",
+            "message": "File intelligent_optimization_results.json is valid JSON"
+        },
+        {
+            "component": "Demo file: demo_certificates.csv",
+            "status": "PASS",
+            "message": "File demo_certificates.csv is valid (36 rows, 6 columns)"
+        },
+        {
+            "component": "Demo file: demo_job_cards.csv",
+            "status": "PASS",
+            "message": "File demo_job_cards.csv is valid (85 rows, 7 columns)"
+        },
+        {
+            "component": "Demo file: demo_telemetry.csv",
+            "status": "PASS",
+            "message": "File demo_telemetry.csv is valid (24 rows, 6 columns)"
+        },
+        {
+            "component": "Demo file: demo_stabling_geometry.csv",
+            "status": "PASS",
+            "message": "File demo_stabling_geometry.csv is valid (24 rows, 25 columns)"
+        },
+        {
+            "component": "Demo file: realistic_mileage.csv",
+            "status": "PASS",
+            "message": "File realistic_mileage.csv is valid (24 rows, 12 columns)"
+        },
+        {
+            "component": "Module: advanced_ml_models.py",
+            "status": "PASS",
+            "message": "Module advanced_ml_models.py exists"
+        },
+        {
+            "component": "Module: enhanced_data_generator.py",
+            "status": "FAIL",
+            "message": "Module enhanced_data_generator.py is missing"
+        },
+        {
+            "component": "Module: intelligent_optimization_engine.py",
+            "status": "PASS",
+            "message": "Module intelligent_optimization_engine.py exists"
+        },
+        {
+            "component": "Module: simple_priority_integration.py",
+            "status": "PASS",
+            "message": "Module simple_priority_integration.py exists"
+        }
+    ]
+}

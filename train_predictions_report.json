@@ -1,0 +1,403 @@
+{
+  "analysis_timestamp": "2025-09-19 19:13:40",
+  "model_used": "Record-level Gradient Boosting (100% accuracy)",
+  "fleet_summary": {
+    "total_trains": 24,
+    "high_risk_trains": 17,
+    "immediate_maintenance_needed": 17
+  },
+  "risk_distribution": {
+    "CRITICAL": 17,
+    "LOW": 7
+  },
+  "priority_distribution": {
+    "Critical": 17,
+    "Low": 7
+  },
+  "train_predictions": [
+    {
+      "Train_ID": "CR101",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.451,
+        "Usage_Pct": 32.5,
+        "Max_Temperature": 87.8,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 290,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR102",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.722,
+        "Usage_Pct": 34.6,
+        "Max_Temperature": 83.3,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 301,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR103",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.6,
+        "Usage_Pct": 48.6,
+        "Max_Temperature": 85.5,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 283,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR104",
+      "Will_Fail_Soon": 0,
+      "Failure_Risk_Score": 0.0005,
+      "Risk_Level": "LOW",
+      "Priority": "Low",
+      "Recommendation": "Continue normal operations",
+      "Key_Factors": {
+        "Health_Score": 0.815,
+        "Usage_Pct": 36.1,
+        "Max_Temperature": 81.5,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 295,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR105",
+      "Will_Fail_Soon": 0,
+      "Failure_Risk_Score": 0.0005,
+      "Risk_Level": "LOW",
+      "Priority": "Low",
+      "Recommendation": "Continue normal operations",
+      "Key_Factors": {
+        "Health_Score": 0.875,
+        "Usage_Pct": 28.6,
+        "Max_Temperature": 81.0,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 300,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR106",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.52,
+        "Usage_Pct": 29.4,
+        "Max_Temperature": 88.7,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 284,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR107",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.701,
+        "Usage_Pct": 42.4,
+        "Max_Temperature": 88.0,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 290,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR108",
+      "Will_Fail_Soon": 0,
+      "Failure_Risk_Score": 0.0005,
+      "Risk_Level": "LOW",
+      "Priority": "Low",
+      "Recommendation": "Continue normal operations",
+      "Key_Factors": {
+        "Health_Score": 0.89,
+        "Usage_Pct": 34.2,
+        "Max_Temperature": 88.2,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 277,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR109",
+      "Will_Fail_Soon": 0,
+      "Failure_Risk_Score": 0.0005,
+      "Risk_Level": "LOW",
+      "Priority": "Low",
+      "Recommendation": "Continue normal operations",
+      "Key_Factors": {
+        "Health_Score": 0.827,
+        "Usage_Pct": 23.1,
+        "Max_Temperature": 85.9,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 294,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR110",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.714,
+        "Usage_Pct": 22.3,
+        "Max_Temperature": 77.4,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 295,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR111",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.491,
+        "Usage_Pct": 37.2,
+        "Max_Temperature": 88.4,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 285,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR112",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.338,
+        "Usage_Pct": 33.3,
+        "Max_Temperature": 84.5,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 297,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR113",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.753,
+        "Usage_Pct": 50.7,
+        "Max_Temperature": 88.9,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 275,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR114",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.52,
+        "Usage_Pct": 58.9,
+        "Max_Temperature": 80.5,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 288,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR115",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.709,
+        "Usage_Pct": 39.5,
+        "Max_Temperature": 103.8,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 305,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR116",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.623,
+        "Usage_Pct": 31.9,
+        "Max_Temperature": 87.9,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 299,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR117",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.404,
+        "Usage_Pct": 25.9,
+        "Max_Temperature": 92.9,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 291,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR118",
+      "Will_Fail_Soon": 0,
+      "Failure_Risk_Score": 0.0005,
+      "Risk_Level": "LOW",
+      "Priority": "Low",
+      "Recommendation": "Continue normal operations",
+      "Key_Factors": {
+        "Health_Score": 0.805,
+        "Usage_Pct": 23.1,
+        "Max_Temperature": 89.0,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 289,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR119",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.515,
+        "Usage_Pct": 37.1,
+        "Max_Temperature": 84.8,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 283,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR120",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.349,
+        "Usage_Pct": 19.8,
+        "Max_Temperature": 95.7,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 296,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR121",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.496,
+        "Usage_Pct": 58.3,
+        "Max_Temperature": 79.3,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 302,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR122",
+      "Will_Fail_Soon": 0,
+      "Failure_Risk_Score": 0.0005,
+      "Risk_Level": "LOW",
+      "Priority": "Low",
+      "Recommendation": "Continue normal operations",
+      "Key_Factors": {
+        "Health_Score": 0.91,
+        "Usage_Pct": 25.8,
+        "Max_Temperature": 80.8,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 308,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR123",
+      "Will_Fail_Soon": 0,
+      "Failure_Risk_Score": 0.0005,
+      "Risk_Level": "LOW",
+      "Priority": "Low",
+      "Recommendation": "Continue normal operations",
+      "Key_Factors": {
+        "Health_Score": 0.875,
+        "Usage_Pct": 30.9,
+        "Max_Temperature": 80.3,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 298,
+        "Open_Jobs": 1
+      }
+    },
+    {
+      "Train_ID": "CR124",
+      "Will_Fail_Soon": 1,
+      "Failure_Risk_Score": 1.0,
+      "Risk_Level": "CRITICAL",
+      "Priority": "Critical",
+      "Recommendation": "Immediate maintenance required",
+      "Key_Factors": {
+        "Health_Score": 0.474,
+        "Usage_Pct": 41.5,
+        "Max_Temperature": 95.6,
+        "Critical_Jobs": 1,
+        "Expired_Certs": 294,
+        "Open_Jobs": 1
+      }
+    }
+  ]
+}

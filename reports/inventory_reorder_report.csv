@@ -1,0 +1,15 @@
+Part_ID,Part_Name,Category,Supplier_Name,Quantity_Available,Reorder_Level,Unit_Cost,Lead_Time_Days,Usage_Count,Criticality_Level,needs_reorder,priority_score
+P028,Pantograph Shoe,HVAC,TechnoRail India,2,6,31626,25,18,High,True,32.68
+P019,Air Compressor,Safety,RailTech Ltd,0,5,23927,23,19,High,True,32.489999999999995
+P035,Battery Pack,Safety,MetroParts Co.,8,9,2315,23,5,High,True,32.349999999999994
+P007,Cable Harness,Electrical,RailTech Ltd,9,9,36210,19,23,High,True,32.129999999999995
+P021,Track Circuit Relay,Mechanical,MetroParts Co.,6,9,24280,19,17,High,True,32.07
+P015,HVAC Filter,Electrical,TechnoRail India,8,10,36508,20,2,High,True,32.02
+P004,Lighting Inverter,HVAC,RailTech Ltd,5,7,22507,8,3,High,True,30.830000000000002
+P022,Driver Display Panel,HVAC,UrbanRail Supplies,4,5,7243,30,8,Medium,True,23.08
+P039,Suspension Spring,Safety,ABC Spares,2,9,10103,28,22,Medium,True,23.02
+P029,Control Unit PCB,Safety,MetroParts Co.,3,7,4460,27,14,Medium,True,22.84
+P001,HVAC Filter,Mechanical,UrbanRail Supplies,3,7,48169,26,5,Medium,True,22.650000000000002
+P040,Coupler,HVAC,ABC Spares,6,6,42774,25,13,Low,True,12.63
+P018,Main Fuse,HVAC,MetroParts Co.,4,4,23957,20,10,Low,True,12.1
+P002,Gear Box,Electrical,UrbanRail Supplies,3,6,23586,8,7,Low,True,10.870000000000001

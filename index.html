@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetrOps | Intelligent Fleet Optimization</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Chart.js for Animated Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+        /* Import a modern font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        /* --- CSS Variables for Theming --- */
+        :root {
+            --bg-dark: #0D1117;
+            --bg-dark-secondary: #161B22;
+            --text-dark: #E6EDF3;
+            --text-dark-secondary: #8B949E;
+            --accent-dark: #58A6FF;
+            --accent-dark-glow: rgba(88, 166, 255, 0.2);
+            --hover-dark: #21262d;
+            --border-dark: #30363D;
+            --green: #238636;
+            --yellow: #F59E0B;
+            --red: #DA3633;
+            --orange: #F97316;
+
+            --bg-light: #F9FAFB;
+            --bg-light-secondary: #FFFFFF;
+            --text-light: #1F2937;
+            --text-light-secondary: #6B7281;
+            --accent-light: #2563EB;
+            --accent-light-glow: rgba(37, 99, 235, 0.1);
+            --hover-light: #F3F4F6;
+            --border-light: #E5E7EB;
+
+            --sidebar-width: 280px;
+            --transition-speed: 0.4s;
+        }
+
+        /* --- General Styles & Resets --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-dark);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            overflow: hidden; /* Prevent scrollbars during transitions */
+        }
+
+        body.light-mode {
+            --bg-dark: var(--bg-light);
+            --bg-dark-secondary: var(--bg-light-secondary);
+            --text-dark: var(--text-light);
+            --text-dark-secondary: var(--text-light-secondary);
+            --accent-dark: var(--accent-light);
+            --accent-dark-glow: var(--accent-light-glow);
+            --hover-dark: var(--hover-light);
+            --border-dark: var(--border-light);
+            --green: #16A34A;
+            --red: #DC2626;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-dark-secondary); }
+
+        /* --- LOGIN PAGE STYLES --- */
+        #login-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            opacity: 1;
+            transform: scale(1);
+        }
+        #login-page.fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--bg-dark-secondary);
+            padding: 2.5rem 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .login-header h1 {
+            font-size: 2.5rem; 
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent-dark), #b392f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+        .login-header p {
+            color: var(--text-dark-secondary);
+            margin-bottom: 2rem;
+        }
+        .login-form .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .login-form .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dark-secondary);
+        }
+        .login-form .input-field {
+            width: 100%;
+            padding: 1rem 1rem 1rem 2.5rem;
+            background-color: var(--hover-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 10px;
+            color: var(--text-dark);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .login-form .input-field:focus {
+            outline: none;
+            border-color: var(--accent-dark);
+            box-shadow: 0 0 0 3px var(--accent-dark-glow);
+        }
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--accent-dark);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .login-btn:hover {
+            filter: brightness(1.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--accent-dark-glow);
+        }
+        .login-error {
+            color: var(--red);
+            background-color: rgba(218, 54, 51, 0.1);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none; /* Initially hidden */
+        }
+        
+        /* --- DASHBOARD STYLES --- */
+        #dashboard-app {
+            transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+            overflow: auto; /* Allow dashboard to scroll */
+            height: 100vh;
+        }
+        #dashboard-app.fade-in {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+
+        /* --- Sidebar Styles --- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background-color: var(--bg-dark-secondary);
+            border-right: 1px solid var(--border-dark);
+            transform: translateX(calc(-1 * var(--sidebar-width)));
+            transition: transform var(--transition-speed) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+        
+        .sidebar-header {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid var(--border-dark);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background-color: var(--hover-dark);
+            border-radius: 10px;
+        }
+        
+        .user-icon { font-size: 2.5rem; color: var(--accent-dark); }
+        .user-info h4 { font-size: 1rem; color: var(--text-dark); font-weight: 600; }
+        .user-info p { font-size: 0.8rem; color: var(--text-dark-secondary); }
+
+        .sidebar-links {
+            list-style: none;
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+
+        .sidebar-links a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-dark-secondary);
+            font-weight: 500;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-links a i {
+            width: 20px;
+            text-align: center;
+            transition: color 0.3s ease, transform 0.3s ease;
+            color: var(--accent-dark);
+        }
+        
+        .sidebar-links a.active,
+        .sidebar-links a:hover {
+            background-color: var(--hover-dark);
+            color: var(--accent-dark);
+            border-left-color: var(--accent-dark);
+        }
+        .sidebar-links a:hover i {
+            transform: scale(1.1);
+        }
+        
+        .sidebar-footer {
+            padding: 1.5rem;
+            margin-top: auto;
+            border-top: 1px solid var(--border-dark);
+        }
+         #logout-link { cursor: pointer; }
+        .theme-switcher {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-dark-secondary);
+            font-weight: 500;
+             margin-top: 1rem;
+        }
+
+        /* --- Theme Switcher --- */
+        .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--hover-dark); transition: .4s; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
+        input:checked + .slider { background-color: var(--accent-dark); }
+        input:checked + .slider:before { transform: translateX(22px); }
+        .slider.round { border-radius: 34px; }
+        .slider.round:before { border-radius: 50%; }
+
+        /* --- Header --- */
+        .top-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background-color: var(--bg-dark-secondary);
+            border-bottom: 1px solid var(--border-dark);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .menu-icon {
+            cursor: pointer;
+            z-index: 1002;
+            padding: 10px;
+            margin-left: -10px;
+        }
+        .line { width: 30px; height: 3px; background-color: var(--text-dark); margin: 6px 0; border-radius: 2px; transition: all 0.3s ease-in-out; }
+        .menu-icon.open .line1 { transform: rotate(-45deg) translate(-7px, 7px); }
+        .menu-icon.open .line2 { opacity: 0; }
+        .menu-icon.open .line3 { transform: rotate(45deg) translate(-7px, -7px); }
+        
+        .website-name { 
+            font-size: 1.8rem; 
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent-dark), #b392f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .last-updated {
+            font-size: 0.8rem;
+            color: var(--text-dark-secondary);
+            white-space: nowrap;
+        }
+        .refresh-btn {
+            background-color: var(--hover-dark);
+            border: 1px solid var(--border-dark);
+            color: var(--text-dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .refresh-btn:hover {
+            background-color: var(--accent-dark);
+            color: white;
+            border-color: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        .refresh-btn i {
+             transition: transform 0.5s ease;
+        }
+        .refresh-btn.spinning i {
+            transform: rotate(360deg);
+        }
+
+
+        /* --- Main Content --- */
+        .main-content {
+            padding: 2rem 1.5rem;
+            transition: margin-left var(--transition-speed) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .main-content.shifted {
+            margin-left: var(--sidebar-width);
+        }
+
+        .page { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .page.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .page-header { font-size: 2.2rem; font-weight: 700; margin-bottom: 2rem; color: var(--text-dark); }
+        
+        /* --- Reusable Components --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-card { background: var(--bg-dark-secondary); padding: 1.5rem; border-radius: 15px; border: 1px solid var(--border-dark); display: flex; align-items: center; gap: 1.5rem; transition: all 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px var(--accent-dark-glow), 0 0 20px var(--accent-dark-glow); border-color: var(--accent-dark); }
+        .card-icon { font-size: 2.5rem; color: var(--accent-dark); }
+        .card-info p { font-size: 1rem; color: var(--text-dark-secondary); margin-bottom: 0.25rem; }
+        .card-info span { font-size: 1.75rem; font-weight: 700; color: var(--text-dark); }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .grid-card { background: var(--bg-dark-secondary); padding: 1.5rem; border-radius: 15px; border: 1px solid var(--border-dark); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .grid-card h3 { font-size: 1.25rem; margin-bottom: 1.5rem; font-weight: 600; }
+        .chart-container { height: 400px; position: relative; }
+        .view-all-btn {
+            display: block;
+            width: fit-content;
+            margin: 1.5rem auto 0;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--hover-dark);
+            color: var(--text-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .view-all-btn:hover {
+            background-color: var(--accent-dark);
+            color: white;
+            border-color: var(--accent-dark);
+        }
+
+        /* --- Custom Table Styling --- */
+        .table-container { overflow-x: auto; }
+        .custom-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        .custom-table thead { background-color: var(--hover-dark); }
+        .custom-table th, .custom-table td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid var(--border-dark); white-space: nowrap;}
+        .custom-table tbody tr { transition: background-color 0.2s ease; }
+        .custom-table tbody tr:hover { background-color: var(--hover-dark); }
+        .custom-table .actions { text-align: center; }
+        .custom-table .action-btn { background: none; border: none; color: var(--text-dark-secondary); cursor: pointer; font-size: 1.1rem; margin: 0 0.5rem; transition: color 0.2s, transform 0.2s; }
+        .custom-table .action-btn:hover { color: var(--accent-dark); transform: scale(1.2); }
+        .custom-table .action-btn.done { color: var(--green); }
+        .custom-table tr.completed { opacity: 0.6; text-decoration: line-through; }
+        .custom-table tbody tr.hidden-row { display: none; }
+        .status-indicator { padding: 0.25rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+        .status-green { background-color: rgba(16, 185, 129, 0.1); color: var(--green); }
+        .status-yellow { background-color: rgba(245, 158, 11, 0.1); color: var(--yellow); }
+        .status-red { background-color: rgba(239, 68, 68, 0.1); color: var(--red); }
+        .status-blue { background-color: rgba(59, 130, 246, 0.1); color: var(--accent-dark); }
+        .status-grey { background-color: rgba(107, 114, 128, 0.1); color: var(--text-dark-secondary); }
+        .status-orange { background-color: rgba(249, 115, 22, 0.1); color: var(--orange); }
+
+        /* Specific Page Styles */
+        .ml-insights ul { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+        .ml-insights li { display: flex; align-items: center; gap: 1rem; font-size: 1rem; font-weight: 500; }
+        .ml-insights li i { font-size: 1.5rem; }
+        .ml-insights li span { flex-grow: 1; color: var(--text-dark-secondary); }
+        .ml-insights .status.enabled { color: var(--green); background-color: rgba(16, 185, 129, 0.1); padding: 0.25rem 0.5rem; border-radius: 5px; }
+        .ml-insights .status-value { font-size: 1.5rem; font-weight: 700; color: var(--red); }
+        .filters { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
+        .filters input, .filters select { padding: 0.6rem; background-color: var(--hover-dark); border: 1px solid var(--border-dark); border-radius: 8px; color: var(--text-dark); }
+        .assignment-card { background-color: var(--bg-dark); border: 1px solid var(--border-dark); border-radius: 10px; padding: 1rem; margin-bottom: 1rem; }
+        .assignment-header { display: flex; align-items: center; gap: 1rem; font-weight: 600; font-size: 1.1rem;}
+        .assignment-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; padding-top: 1rem; }
+        .assignment-body div strong { display: block; margin-bottom: 0.25rem; font-weight: 500;}
+        .schedule-controls { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
+        .schedule-controls button { padding: 0.6rem 1.2rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .schedule-controls button i { transition: transform 0.5s ease; }
+        .schedule-controls button:hover i { transform: rotate(180deg); }
+        .schedule-controls .btn-primary { background-color: var(--accent-dark); color: white; }
+        .schedule-controls .btn-primary:hover { filter: brightness(1.2); }
+        .schedule-controls .btn-secondary { background-color: var(--hover-dark); color: var(--text-dark); border: 1px solid var(--border-dark); }
+        .scenario-card { border-radius: 15px; padding: 1.5rem; color: white; margin-bottom: 1.5rem; }
+        .scenario-card h4 { margin-bottom: 0.5rem; }
+        .scenario-extreme { background: linear-gradient(135deg, #8B0000, #DC143C); }
+        .scenario-high { background: linear-gradient(135deg, #FF4500, #FF6347); }
+        .scenario-very-high { background: linear-gradient(135deg, #FF0000, #FF6347); }
+        .consequence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .consequence-card { background-color: var(--bg-dark-secondary); padding: 1.5rem; border-radius: 10px; }
+        .consequence-card h4 { margin-bottom: 1rem; }
+        .consequence-card ul { list-style: none; padding-left: 0.5rem; }
+        .consequence-card li { margin-bottom: 0.75rem; color: var(--text-dark-secondary); }
+        .consequence-card li i { margin-right: 0.5rem; }
+        .consequence-card .text-red { color: var(--red); }
+        
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-speed) ease, visibility 0s var(--transition-speed) ease;
+        }
+        .overlay.active { opacity: 1; visibility: visible; transition: opacity var(--transition-speed) ease; }
+
+        /* --- Toast Notification --- */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--bg-dark-secondary);
+            color: var(--text-dark);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-dark);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateX(calc(100% + 20px));
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 2000;
+        }
+        .toast.show { transform: translateX(0); }
+        .toast i { font-size: 1.5rem; }
+        .toast.success { border-left-color: var(--green); }
+        .toast.success i { color: var(--green); }
+        .toast.info { border-left-color: var(--accent-dark); }
+        .toast.info i { color: var(--accent-dark); }
+
+        @media (max-width: 992px) {
+            .main-content.shifted { margin-left: 0; }
+            .last-updated { display: none; }
+        }
+        @media (max-width: 768px) {
+            .header-left { gap: 1rem; }
+            .login-container { padding: 2rem 1.5rem; }
+            .main-content { padding: 1.5rem 1rem; }
+            .page-header { font-size: 1.8rem; }
+            .consequence-grid { grid-template-columns: 1fr; }
+        }
+        
+    </style>
+</head>
+<body style="overflow: auto;">
+
+    <!-- LOGIN PAGE -->
+    <div id="login-page" class="fade-out hidden">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>MetrOps</h1>
+                <p>Intelligent Fleet Optimization</p>
+            </div>
+            <form id="login-form" class="login-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" class="input-field" placeholder="Username" required="">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" class="input-field" placeholder="Password" required="">
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+                <div id="login-error" class="login-error">Invalid username or password.</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- DASHBOARD APPLICATION (Initially Hidden) -->
+    <div id="dashboard-app" class="fade-in">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="user-profile">
+                    <i class="fas fa-user-circle user-icon"></i>
+                    <div class="user-info">
+                        <h4 id="sidebar-username">KMRL Administrator</h4>
+                        <p id="sidebar-user-role">@admin</p>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidebar-links">
+                <li><a href="#fleet-overview" class="nav-link"><i class="fas fa-chart-pie"></i> Fleet Overview</a></li>
+                <li><a href="#fitness-certs" class="nav-link active"><i class="fas fa-file-medical-alt"></i> Fitness Certificates</a></li>
+                <li><a href="#maintenance" class="nav-link"><i class="fas fa-tools"></i> Maintenance &amp; Jobs</a></li>
+                <li><a href="#cleaning" class="nav-link"><i class="fas fa-broom"></i> Train Cleaning</a></li>
+                <li><a href="#mileage" class="nav-link"><i class="fas fa-tachometer-alt"></i> Mileage Balancing</a></li>
+                <li><a href="#depot" class="nav-link"><i class="fas fa-map-signs"></i> Depot Pathfinding</a></li>
+                <li><a href="#scheduling" class="nav-link"><i class="fas fa-calendar-alt"></i> Train Scheduling</a></li>
+                <li><a href="#ml-insights" class="nav-link"><i class="fas fa-brain"></i> ML Insights</a></li>
+                <li><a href="#priority" class="nav-link"><i class="fas fa-fire-alt"></i> Priority Management</a></li>
+                <li><a href="#scenario" class="nav-link"><i class="fas fa-theater-masks"></i> Scenario Analysis</a></li>
+                <li><a href="#inventory" class="nav-link"><i class="fas fa-boxes"></i> Inventory Management</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a id="logout-link" class="sidebar-links" style="margin: 0; padding: 0;">
+                    <span style="display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; width: 100%;"><i class="fas fa-sign-out-alt"></i> Logout</span>
+                </a>
+                <div class="theme-switcher">
+                    <span>Light Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="overlay"></div>
+        <div id="toast-container"></div>
+
+        <div class="content-wrapper">
+            <header class="top-header">
+                <div class="header-left">
+                    <div class="menu-icon">
+                        <div class="line line1"></div>
+                        <div class="line line2"></div>
+                        <div class="line line3"></div>
+                    </div>
+                    <h1 class="website-name">MetrOps</h1>
+                </div>
+                <div class="header-right">
+                    <div class="last-updated">Last Updated: <span id="last-updated-time">12:41:15 AM</span></div>
+                    <button class="refresh-btn" id="refresh-data-btn" title="Refresh Data">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <!-- PAGE 1: FLEET OVERVIEW -->
+                <div id="fleet-overview" class="page">
+                    <h2 class="page-header">Fleet Optimization Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-train"></i></div>
+                            <div class="card-info"><p>Total Trains</p><span id="total-trains">24</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--green);"><i class="fas fa-check-circle"></i></div>
+                            <div class="card-info"><p>Service Ready</p><span id="service-ready">6 (25.0%)</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--yellow);"><i class="fas fa-tools"></i></div>
+                            <div class="card-info"><p>Maintenance Required</p><span id="maintenance-required">12 (50.0%)</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--red);"><i class="fas fa-pause-circle"></i></div>
+                            <div class="card-info"><p>Standby</p><span id="standby">6 (25.0%)</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <h3>Fleet Allocation Analysis</h3>
+                            <div class="chart-container">
+                                <canvas id="fleetAllocationChart" data-rendered="true" width="1250" height="800" style="display: block; box-sizing: border-box; height: 400px; width: 625px;"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid-card ml-insights">
+                            <h3>ML Insights</h3>
+                            <ul>
+                                <li><i class="fas fa-brain" style="color: #7aa2f7;"></i><span>Failure Prediction</span><span class="status enabled">Enabled <i class="fas fa-check"></i></span></li>
+                                <li><i class="fas fa-cogs" style="color: var(--green);"></i><span>Decision Optimization</span><span class="status enabled">Enabled <i class="fas fa-check"></i></span></li>
+                                <li><i class="fas fa-chart-line" style="color: var(--yellow);"></i><span>Demand Forecasting</span><span class="status enabled">Enabled <i class="fas fa-check"></i></span></li>
+                                <li><i class="fas fa-exclamation-triangle" style="color: var(--red);"></i><span>High Risk Trains</span><span class="status-value" id="high-risk-trains">7</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="grid-card" style="margin-top: 1.5rem;">
+                        <h3>Train Recommendations</h3>
+                        <div class="table-container">
+                            <table class="custom-table" id="recommendationsTable">
+                                <thead><tr><th>Train ID</th><th>Recommended Action</th><th>Priority Score</th><th>ML Confidence</th><th>Failure Risk</th></tr></thead>
+                                <tbody><tr class=""><td>CR104</td><td><span class="status-indicator status-yellow">Maintenance</span></td><td>95.5</td><td>98.0%</td><td>92.0%</td></tr><tr class=""><td>CR115</td><td><span class="status-indicator status-yellow">Maintenance</span></td><td>88.2</td><td>95.0%</td><td>85.0%</td></tr><tr class=""><td>CR118</td><td><span class="status-indicator status-yellow">Maintenance</span></td><td>92.1</td><td>97.0%</td><td>88.0%</td></tr><tr class=""><td>CR107</td><td><span class="status-indicator status-green">Service</span></td><td>30.1</td><td>99.0%</td><td>15.0%</td></tr><tr class=""><td>CR101</td><td><span class="status-indicator status-green">Service</span></td><td>25.4</td><td>99.0%</td><td>12.0%</td></tr><tr class="hidden-row" style="display: table-row;"><td>CR121</td><td><span class="status-indicator status-green">Service</span></td><td>35.8</td><td>98.0%</td><td>20.0%</td></tr><tr class="hidden-row" style="display: table-row;"><td>CR109</td><td><span class="status-indicator status-yellow">Maintenance</span></td><td>85.0</td><td>94.0%</td><td>81.0%</td></tr><tr class="hidden-row" style="display: table-row;"><td>CR123</td><td><span class="status-indicator status-green">Service</span></td><td>22.0</td><td>99.0%</td><td>10.0%</td></tr></tbody>
+                            </table>
+                            <button class="view-all-btn" data-table="recommendationsTable">Show Less</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE 2: FITNESS CERTIFICATES -->
+                <div id="fitness-certs" class="page active">
+                    <h2 class="page-header">Fitness Certificate Management</h2>
+                    <div class="stats-grid">
+                         <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+                            <div class="card-info"><p>Total Certificates</p><span id="total-certs">1</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--green);"><i class="fas fa-check-circle"></i></div>
+                            <div class="card-info"><p>Valid</p><span id="valid-certs">0 (0.0%)</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--red);"><i class="fas fa-times-circle"></i></div>
+                            <div class="card-info"><p>Expired</p><span id="expired-certs">1 (100.0%)</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--orange);"><i class="fas fa-sync-alt"></i></div>
+                            <div class="card-info"><p>Pending/Renewal</p><span id="pending-certs">0 (0.0%)</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <h3>Certificate Status Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="certificateStatusChart" width="600" height="800" style="display: block; box-sizing: border-box; height: 400px; width: 300px;" data-rendered="true"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid-card">
+                            <h3>Validity Periods by Department</h3>
+                            <div class="chart-container">
+                                <canvas id="validityDepartmentChart" width="600" height="800" style="display: block; box-sizing: border-box; height: 400px; width: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-card" style="margin-top: 1.5rem;">
+                        <h3>Certificate Details</h3>
+                        <div class="filters">
+                            <select id="cert-dept-filter"><option value="All">All Departments</option><option value="Rolling Stock">Rolling Stock</option><option value="Signaling">Signaling</option><option value="Track">Track</option><option value="Electrical">Electrical</option></select>
+                            <select id="cert-status-filter"><option value="All">All Statuses</option><option value="Valid">Valid</option><option value="Expired">Expired</option><option value="Pending">Pending</option><option value="Renewal">Renewal</option></select>
+                            <input type="text" id="cert-search-filter" placeholder="Search Train ID...">
+                        </div>
+                        <div class="table-container">
+                            <table class="custom-table" id="certificatesTable">
+                                <thead><tr><th>Cert ID</th><th>Train ID</th><th>Department</th><th>Status</th><th>Expiry Date</th><th>Priority</th></tr></thead>
+                                <tbody><tr class=""><td>CERT-002</td><td>CR104</td><td>Signaling</td><td><span class="status-indicator status-red">Expired</span></td><td>2025-08-15</td><td>Critical</td></tr></tbody>
+                            </table>
+                             <button class="view-all-btn" data-table="certificatesTable">Show Less</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE 3: MAINTENANCE & JOBS -->
+                <div id="maintenance" class="page">
+                    <h2 class="page-header">Maintenance &amp; Job Management</h2>
+                     <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
+                            <div class="card-info"><p>Total Job Cards</p><span id="total-jobs">7</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--orange);"><i class="fas fa-folder-open"></i></div>
+                            <div class="card-info"><p>Open Jobs</p><span id="open-jobs">5</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--red);"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="card-info"><p>Critical Jobs</p><span id="critical-jobs">1</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-clock"></i></div>
+                            <div class="card-info"><p>Avg. Est. Hours</p><span id="avg-hours">5.4</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <h3>Job Status Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="jobStatusChart" width="975" height="800" style="display: block; box-sizing: border-box; height: 400px; width: 487px;" data-rendered="true"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid-card">
+                            <h3>Priority Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="jobPriorityChart" width="975" height="800" style="display: block; box-sizing: border-box; height: 400px; width: 487px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-card" style="margin-top: 1.5rem;">
+                        <h3>Recent Job Cards</h3>
+                        <div class="table-container">
+                            <table class="custom-table" id="jobsTable">
+                                <thead><tr><th>Work Order ID</th><th>Train ID</th><th>Work Type</th><th>Priority</th><th>Status</th><th>Est. Hours</th><th>Created Date</th><th>Actions</th></tr></thead>
+                                <tbody><tr data-job-id="WO-001"><td>WO-001</td><td>CR115</td><td>Corrective</td><td><span class="status-indicator status-red">Critical</span></td><td class="status-cell"><span class="status-indicator status-orange">Open</span></td><td>8</td><td>2025-09-24</td><td class="actions"><button class="action-btn download-btn" title="Download Job Card"><i class="fas fa-download"></i></button><button class="action-btn complete-btn" title="Mark as Done"><i class="fas fa-check-circle"></i></button></td></tr><tr data-job-id="WO-002" class="completed"><td>WO-002</td><td>CR102</td><td>Preventive</td><td><span class="status-indicator status-yellow">Medium</span></td><td class="status-cell"><span class="status-indicator status-green">Completed</span></td><td>4</td><td>2025-09-23</td><td class="actions"><button class="action-btn download-btn" title="Download Job Card"><i class="fas fa-download"></i></button><button class="action-btn complete-btn done" title="Mark as Done" disabled=""><i class="fas fa-check-circle"></i></button></td></tr><tr data-job-id="WO-003" class="completed"><td>WO-003</td><td>CR108</td><td>Preventive</td><td><span class="status-indicator status-green">Low</span></td><td class="status-cell"><span class="status-indicator status-green">Completed</span></td><td>2</td><td>2025-09-22</td><td class="actions"><button class="action-btn download-btn" title="Download Job Card"><i class="fas fa-download"></i></button><button class="action-btn complete-btn done" title="Mark as Done" disabled=""><i class="fas fa-check-circle"></i></button></td></tr><tr data-job-id="WO-004"><td>WO-004</td><td>CR120</td><td>Corrective</td><td><span class="status-indicator status-orange">High</span></td><td class="status-cell"><span class="status-indicator status-orange">Open</span></td><td>12</td><td>2025-09-24</td><td class="actions"><button class="action-btn download-btn" title="Download Job Card"><i class="fas fa-download"></i></button><button class="action-btn complete-btn" title="Mark as Done"><i class="fas fa-check-circle"></i></button></td></tr><tr data-job-id="WO-005"><td>WO-005</td><td>CR105</td><td>Inspection</td><td><span class="status-indicator status-yellow">Medium</span></td><td class="status-cell"><span class="status-indicator status-orange">Open</span></td><td>3</td><td>2025-09-23</td><td class="actions"><button class="action-btn download-btn" title="Download Job Card"><i class="fas fa-download"></i></button><button class="action-btn complete-btn" title="Mark as Done"><i class="fas fa-check-circle"></i></button></td></tr><tr class="hidden-row" data-job-id="WO-006" style="display: table-row;"><td>WO-006</td><td>CR111</td><td>Corrective</td><td><span class="status-indicator status-orange">High</span></td><td class="status-cell"><span class="status-indicator status-orange">Open</span></td><td>6</td><td>2025-09-25</td><td class="actions"><button class="action-btn download-btn" title="Download Job Card"><i class="fas fa-download"></i></button><button class="action-btn complete-btn" title="Mark as Done"><i class="fas fa-check-circle"></i></button></td></tr><tr class="hidden-row" data-job-id="WO-007" style="display: table-row;"><td>WO-007</td><td>CR109</td><td>Preventive</td><td><span class="status-indicator status-green">Low</span></td><td class="status-cell"><span class="status-indicator status-grey">On Hold</span></td><td>2.5</td><td>2025-09-25</td><td class="actions"><button class="action-btn download-btn" title="Download Job Card"><i class="fas fa-download"></i></button><button class="action-btn complete-btn" title="Mark as Done"><i class="fas fa-check-circle"></i></button></td></tr></tbody>
+                            </table>
+                            <button class="view-all-btn" data-table="jobsTable">Show Less</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PAGE 4: TRAIN CLEANING -->
+                <div id="cleaning" class="page">
+                    <h2 class="page-header">Train Cleaning &amp; Worker Management</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-users"></i></div>
+                            <div class="card-info"><p>Total Workers</p><span id="total-workers">32</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--green);"><i class="fas fa-user-check"></i></div>
+                            <div class="card-info"><p>Available Workers</p><span id="available-workers">18</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--orange);"><i class="fas fa-train"></i></div>
+                            <div class="card-info"><p>Trains to Clean</p><span id="trains-to-clean">9</span></div>
+                        </div>
+                         <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-tasks"></i></div>
+                            <div class="card-info"><p>Assignments Made</p><span id="assignments-made">0</span></div>
+                        </div>
+                    </div>
+                    <div class="grid-card" style="margin-bottom:1.5rem;">
+                        <h3>Intelligent Auto-Assignment System</h3>
+                        <div class="schedule-controls">
+                            <button class="btn-primary" id="auto-assign-btn"><i class="fas fa-robot"></i> Auto-Assign Cleaning Slots</button>
+                            <button class="btn-secondary" id="refresh-assignments-btn"><i class="fas fa-sync-alt"></i> Refresh Assignments</button>
+                            <div style="display:flex; align-items:center; gap:0.5rem">
+                               <span>Priority Opt.</span> <label class="switch"><input type="checkbox" checked=""><span class="slider round"></span></label>
+                            </div>
+                        </div>
+                         <div id="cleaningAssignments" style="margin-top: 1.5rem;">
+                            <!-- Assignments will be injected here by JS -->
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <h3>Worker Availability Status</h3>
+                            <div class="chart-container">
+                                <canvas id="workerAvailabilityChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid-card">
+                            <h3>Worker Duty Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="workerDutyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PAGE 5: MILEAGE BALANCING -->
+                <div id="mileage" class="page">
+                    <h2 class="page-header">Mileage Balancing &amp; Component Wear</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-train"></i></div>
+                            <div class="card-info"><p>Total Trains</p><span>24</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--accent-dark);"><i class="fas fa-chart-line"></i></div>
+                            <div class="card-info"><p>Current Avg. Usage</p><span id="avg-usage">65.2%</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--red);"><i class="fas fa-fire"></i></div>
+                            <div class="card-info"><p>High Wear Trains</p><span id="high-wear">4</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--orange);"><i class="fas fa-exclamation-circle"></i></div>
+                            <div class="card-info"><p>Critical Priority</p><span id="mileage-critical">2</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <h3>Component Usage Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="componentUsageChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid-card">
+                            <h3>Current Fleet Priority</h3>
+                            <div class="chart-container">
+                                <canvas id="mileagePriorityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-card" style="margin-top: 1.5rem;">
+                        <h3>Balancing Recommendations</h3>
+                        <div class="table-container">
+                            <table class="custom-table" id="balancingTable">
+                                <thead><tr><th>Train ID</th><th>Avg. Usage %</th><th>Priority</th><th>Critical Components</th><th>Recommendation</th></tr></thead>
+                                <tbody></tbody>
+                            </table>
+                             <button class="view-all-btn" data-table="balancingTable">View All</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE 6: DEPOT PATHFINDING -->
+                <div id="depot" class="page">
+                    <h2 class="page-header">Depot Pathfinding &amp; Stabling Optimization</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-road"></i></div>
+                            <div class="card-info"><p>Total Bays</p><span>45</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--green);"><i class="fas fa-check-circle"></i></div>
+                            <div class="card-info"><p>Available Bays</p><span>35</span></div>
+                        </div>
+                         <div class="stat-card">
+                            <div class="card-icon" style="color: var(--yellow);"><i class="fas fa-bolt"></i></div>
+                            <div class="card-info"><p>Avg. Energy Cost</p><span>₹750</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--red);"><i class="fas fa-random"></i></div>
+                            <div class="card-info"><p>Reallocation Needed</p><span>3</span></div>
+                        </div>
+                    </div>
+                    <div class="grid-card">
+                        <h3>KMRL Depot Stabling Map</h3>
+                        <div class="chart-container" style="height: 500px;">
+                            <canvas id="depotMapChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="grid-card" style="margin-top: 1.5rem;">
+                        <h3>Train Position Analytics</h3>
+                        <div class="chart-container">
+                            <canvas id="trainPositionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE 7: TRAIN SCHEDULING -->
+                <div id="scheduling" class="page">
+                    <h2 class="page-header">Train Contract Scheduling</h2>
+                    <div class="stats-grid">
+                         <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-check-double"></i></div>
+                            <div class="card-info"><p>Confirmed Plans</p><span id="confirmed-plans">7 / 10</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--yellow);"><i class="fas fa-hourglass-half"></i></div>
+                            <div class="card-info"><p>Awaiting Approval</p><span id="awaiting-approval">2</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--red);"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="card-info"><p>Needs Review</p><span id="needs-review">1</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--text-dark-secondary);"><i class="fas fa-tools"></i></div>
+                            <div class="card-info"><p>Under Maintenance</p><span id="maint-schedule">1</span></div>
+                        </div>
+                    </div>
+                    <div class="grid-card">
+                        <h3>Tomorrow's Train-Contract Assignments</h3>
+                        <div class="schedule-controls">
+                            <button class="btn-primary" id="generate-schedule-btn"><i class="fas fa-robot"></i> Auto-Generate</button>
+                            <button class="btn-secondary" id="optimize-schedule-btn"><i class="fas fa-bolt"></i> Optimize Plan</button>
+                            <button class="btn-secondary" id="save-schedule-btn"><i class="fas fa-save"></i> Save &amp; Confirm</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="custom-table" id="scheduleTable">
+                                <thead><tr><th>Train ID</th><th>Contract</th><th>Start Time</th><th>End Time</th><th>Route</th><th>Status</th><th>Priority</th></tr></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <h3>Contract Priority Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="contractPriorityChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid-card">
+                            <h3>Schedule Status Overview</h3>
+                            <div class="chart-container">
+                                <canvas id="scheduleStatusChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE 8: ML INSIGHTS -->
+                <div id="ml-insights" class="page">
+                    <h2 class="page-header">Machine Learning Model Insights</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-brain"></i></div>
+                            <div class="card-info"><p>Failure Prediction Accuracy</p><span>96.5%</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                            <div class="card-info"><p>Decision Optimization Accuracy</p><span>92.1%</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="card-info"><p>LSTM Demand MSE</p><span>125</span></div>
+                        </div>
+                         <div class="stat-card">
+                            <div class="card-icon" style="color:var(--green);"><i class="fas fa-check"></i></div>
+                            <div class="card-info"><p>Model Status</p><span>Healthy</span></div>
+                        </div>
+                    </div>
+                    <div class="grid-card">
+                        <h3>Top 10 Most Important Features</h3>
+                        <div class="chart-container">
+                            <canvas id="featureImportanceChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <h3>Failure Risk Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="failureRiskChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid-card">
+                            <h3>ML Decision vs Final Recommendation</h3>
+                            <div class="chart-container">
+                                <canvas id="mlDecisionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE 9: PRIORITY MANAGEMENT -->
+                <div id="priority" class="page">
+                    <h2 class="page-header">Real-Time Priority Management</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-train"></i></div>
+                            <div class="card-info"><p>Trains Monitored</p><span id="prio-monitored">24</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--accent-dark);"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="card-info"><p>Avg Priority Score</p><span id="prio-avg">45.2</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--red);"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="card-info"><p>Critical Priority</p><span id="prio-critical">2</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--yellow);"><i class="fas fa-clipboard-list"></i></div>
+                            <div class="card-info"><p>Priority Job Cards</p><span id="prio-jobs">8</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <h3>Fleet Priority Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="fleetPriorityChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid-card">
+                            <h3>Fault Severity Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="faultSeverityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-card" style="margin-top: 1.5rem;">
+                        <h3>Top Priority Trains</h3>
+                        <div class="table-container">
+                            <table class="custom-table" id="priorityTable">
+                                <thead><tr><th>Coach ID</th><th>Priority Score</th><th>Condition Score</th><th>Fault Severity</th><th>Criticality</th><th>Time Since Maint.</th></tr></thead>
+                                <tbody></tbody>
+                            </table>
+                             <button class="view-all-btn" data-table="priorityTable">View All</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE 10: SCENARIO ANALYSIS -->
+                <div id="scenario" class="page">
+                    <h2 class="page-header">Maintenance Deferral Risk Analysis</h2>
+                    <div class="grid-card">
+                        <h3>Select Maintenance Deferral Scenario</h3>
+                        <div class="filters">
+                            <select id="scenarioSelector">
+                                <option value="critical">Defer Critical Train Maintenance (CR114)</option>
+                                <option value="high">Defer All High Priority Maintenance</option>
+                                <option value="week">Skip Scheduled Maintenance for 1 Week</option>
+                                <option value="certs">Ignore Certificate Renewals</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="scenario-content" style="margin-top: 1.5rem;">
+                        <!-- Scenario details will be injected here -->
+                    </div>
+                </div>
+
+                <!-- PAGE 11: INVENTORY MANAGEMENT -->
+                <div id="inventory" class="page">
+                    <h2 class="page-header">Spare Parts Inventory Management</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="card-icon"><i class="fas fa-boxes"></i></div>
+                            <div class="card-info"><p>Total Parts</p><span id="total-parts">50</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--red);"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="card-info"><p>Needs Reorder</p><span id="needs-reorder">12 (24.0%)</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--orange);"><i class="fas fa-fire"></i></div>
+                            <div class="card-info"><p>Critical Priority</p><span id="critical-priority-parts">5</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="color: var(--yellow);"><i class="fas fa-clock"></i></div>
+                            <div class="card-info"><p>Avg Lead Time</p><span id="avg-lead-time">18.5 days</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Critical Reorder Alerts -->
+                    <div class="grid-card" style="margin-bottom: 1.5rem; border-left: 4px solid var(--red);">
+                        <h3><i class="fas fa-bell" style="color: var(--red);"></i> Critical Reorder Alerts</h3>
+                        <div id="critical-reorder-alerts">
+                            <!-- Critical alerts will be dynamically populated -->
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <h3>Stock Status Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="stockStatusChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid-card">
+                            <h3>Parts by Category</h3>
+                            <div class="chart-container">
+                                <canvas id="categoryDistributionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="grid-card">
+                            <h3>Supplier Performance</h3>
+                            <div class="chart-container">
+                                <canvas id="supplierPerformanceChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid-card">
+                            <h3>Criticality vs Lead Time</h3>
+                            <div class="chart-container">
+                                <canvas id="criticalityLeadTimeChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Inventory Details Table -->
+                    <div class="grid-card" style="margin-top: 1.5rem;">
+                        <h3>Inventory Details</h3>
+                        <div class="filters">
+                            <select id="inventory-category-filter">
+                                <option value="All">All Categories</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="HVAC">HVAC</option>
+                                <option value="Safety">Safety</option>
+                            </select>
+                            <select id="inventory-criticality-filter">
+                                <option value="All">All Criticality</option>
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                            <select id="inventory-status-filter">
+                                <option value="All">All Status</option>
+                                <option value="needs_reorder">Needs Reorder</option>
+                                <option value="sufficient">Sufficient Stock</option>
+                            </select>
+                            <input type="text" id="inventory-search-filter" placeholder="Search part name or ID...">
+                        </div>
+                        <div class="table-container">
+                            <table class="custom-table" id="inventoryTable">
+                                <thead>
+                                    <tr>
+                                        <th>Part ID</th>
+                                        <th>Part Name</th>
+                                        <th>Category</th>
+                                        <th>Available</th>
+                                        <th>Reorder Level</th>
+                                        <th>Status</th>
+                                        <th>Criticality</th>
+                                        <th>Supplier</th>
+                                        <th>Lead Time</th>
+                                        <th>Unit Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <button class="view-all-btn" data-table="inventoryTable">View All</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- SELECTORS ---
+        const ui = {
+            loginPage: document.getElementById('login-page'),
+            dashboardApp: document.getElementById('dashboard-app'),
+            loginForm: document.getElementById('login-form'),
+            loginError: document.getElementById('login-error'),
+            logoutLink: document.getElementById('logout-link'),
+            sidebarUsername: document.getElementById('sidebar-username'),
+            sidebarUserRole: document.getElementById('sidebar-user-role'),
+            
+            menuIcon: document.querySelector('.menu-icon'),
+            sidebar: document.querySelector('.sidebar'),
+            mainContent: document.querySelector('.main-content'),
+            overlay: document.querySelector('.overlay'),
+            themeToggle: document.getElementById('theme-toggle'),
+            navLinks: document.querySelectorAll('.nav-link'),
+            pages: document.querySelectorAll('.page'),
+            toastContainer: document.getElementById('toast-container'),
+            refreshBtn: document.getElementById('refresh-data-btn'),
+            lastUpdated: document.getElementById('last-updated-time'),
+        };
+
+        // --- STATE ---
+        const state = {
+            isSidebarActive: false,
+            isLightMode: localStorage.getItem('theme') === 'light',
+            allCharts: {},
+            currentUser: null,
+        };
+        
+        // --- SIMULATED USER DATABASE (like MongoDB) ---
+        // In a real application, this data would come from a secure backend.
+        // Passwords should always be hashed, not stored in plain text.
+        const mockUsers = {
+            "admin": { password: "admin123", fullName: "KMRL Administrator", role: "Admin" },
+            "supervisor": { password: "super123", fullName: "Fleet Supervisor", role: "Supervisor" },
+            "worker": { password: "worker123", fullName: "Maintenance Worker", role: "Worker" }
+        };
+
+        // --- AUTHENTICATION LOGIC ---
+        const login = (username, password) => {
+            const user = mockUsers[username];
+            if (user && user.password === password) {
+                state.currentUser = { username, ...user };
+                sessionStorage.setItem('loggedInUser', JSON.stringify(state.currentUser));
+                return state.currentUser;
+            }
+            return null;
+        };
+
+        const logout = () => {
+            state.currentUser = null;
+            sessionStorage.removeItem('loggedInUser');
+            showLoginPage();
+        };
+
+        const showDashboard = (user) => {
+            ui.sidebarUsername.textContent = user.fullName;
+            ui.sidebarUserRole.textContent = `@${user.username}`;
+            
+            ui.loginPage.classList.add('fade-out');
+            setTimeout(() => {
+                ui.dashboardApp.classList.remove('hidden');
+                ui.loginPage.classList.add('hidden');
+                ui.dashboardApp.classList.add('fade-in');
+                document.body.style.overflow = 'auto';
+            }, 500);
+        };
+
+        const showLoginPage = () => {
+            ui.dashboardApp.classList.remove('fade-in');
+            setTimeout(() => {
+                 ui.loginPage.classList.remove('hidden');
+                 ui.dashboardApp.classList.add('hidden');
+                 ui.loginPage.classList.remove('fade-out');
+                 document.body.style.overflow = 'hidden';
+            }, 500);
+        };
+
+        ui.loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = e.target.username.value;
+            const password = e.target.password.value;
+            const user = login(username, password);
+
+            if (user) {
+                showDashboard(user);
+                showToast(`Welcome, ${user.fullName}!`, 'success');
+            } else {
+                ui.loginError.style.display = 'block';
+            }
+        });
+        
+        ui.logoutLink.addEventListener('click', logout);
+
+
+        // --- UTILITIES ---
+        const showToast = (message, type = 'info') => {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
+            toast.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
+            ui.toastContainer.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.addEventListener('transitionend', () => toast.remove());
+            }, 3000);
+        };
+
+        const updateTimestamp = () => {
+            ui.lastUpdated.textContent = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        };
+
+        // --- DATA REFRESH LOGIC ---
+        const refreshData = () => {
+            const btn = ui.refreshBtn;
+            btn.classList.add('spinning');
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Find the active page and re-initialize it
+                const activePage = document.querySelector('.page.active');
+                if (activePage && chartInitializers[activePage.id]) {
+                    // Clear the rendered flag to allow re-initialization
+                    const charts = activePage.querySelectorAll('canvas');
+                    charts.forEach(c => c.dataset.rendered = "false");
+                    chartInitializers[activePage.id]();
+                }
+
+                btn.classList.remove('spinning');
+                btn.disabled = false;
+                showToast('Dashboard data has been refreshed!', 'success');
+                updateTimestamp();
+            }, 1000); // Simulate network delay
+        };
+
+        ui.refreshBtn.addEventListener('click', refreshData);
+
+
+        // --- SIDEBAR LOGIC ---
+        const toggleSidebar = () => {
+            state.isSidebarActive = !state.isSidebarActive;
+            ui.menuIcon.classList.toggle('open', state.isSidebarActive);
+            ui.sidebar.classList.toggle('active', state.isSidebarActive);
+            ui.overlay.classList.toggle('active', state.isSidebarActive);
+
+            if (window.innerWidth > 992) {
+                ui.mainContent.classList.toggle('shifted', state.isSidebarActive);
+            }
+        };
+
+        ui.menuIcon.addEventListener('click', e => {
+            e.stopPropagation();
+            toggleSidebar();
+        });
+
+        ui.overlay.addEventListener('click', () => {
+            if (state.isSidebarActive) toggleSidebar();
+        });
+
+        // --- THEME & NAVIGATION LOGIC ---
+        const applyTheme = (isLight) => {
+            document.body.classList.toggle('light-mode', isLight);
+            ui.themeToggle.checked = isLight;
+            Object.values(state.allCharts).forEach(chart => updateChartTheme(chart, isLight));
+        };
+
+        ui.themeToggle.addEventListener('change', () => {
+            state.isLightMode = ui.themeToggle.checked;
+            applyTheme(state.isLightMode);
+            localStorage.setItem('theme', state.isLightMode ? 'light' : 'dark');
+        });
+
+        const changePage = (hash) => {
+            ui.navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === hash);
+            });
+            ui.pages.forEach(page => {
+                page.classList.toggle('active', `#${page.id}` === hash);
+            });
+
+            const pageKey = hash.substring(1);
+            if (chartInitializers[pageKey]) {
+                chartInitializers[pageKey]();
+            }
+            
+            if (window.innerWidth <= 768 && state.isSidebarActive) {
+                toggleSidebar();
+            }
+        };
+
+        ui.navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const hash = link.getAttribute('href');
+                if(window.location.hash !== hash) {
+                   window.location.hash = hash;
+                }
+            });
+        });
+        
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash || '#fleet-overview';
+            changePage(hash);
+        });
+
+        // --- MOCK DATA ---
+        const EMBEDDED_DATA = {
+            fleet_overview: {
+                summary: { total_trains: 24, service_ready: 6, maintenance_required: 12, standby: 6 },
+                ml_insights: { high_risk_trains: 7 },
+                recommendations: [
+                    { id: "CR104", action: "Maintenance", priority: 95.5, confidence: 0.98, risk: 0.92 },
+                    { id: "CR115", action: "Maintenance", priority: 88.2, confidence: 0.95, risk: 0.85 },
+                    { id: "CR118", action: "Maintenance", priority: 92.1, confidence: 0.97, risk: 0.88 },
+                    { id: "CR107", action: "Service", priority: 30.1, confidence: 0.99, risk: 0.15 },
+                    { id: "CR101", action: "Service", priority: 25.4, confidence: 0.99, risk: 0.12 },
+                    { id: "CR121", action: "Service", priority: 35.8, confidence: 0.98, risk: 0.20 },
+                    { id: "CR109", action: "Maintenance", priority: 85.0, confidence: 0.94, risk: 0.81 },
+                    { id: "CR123", action: "Service", priority: 22.0, confidence: 0.99, risk: 0.10 },
+                ]
+            },
+            certificates: [
+                { id: "CERT-001", train: "CR101", dept: "Rolling Stock", status: "Valid", expiry: "2026-10-20", priority: "Low", validity: 365 },
+                { id: "CERT-002", train: "CR104", dept: "Signaling", status: "Expired", expiry: "2025-08-15", priority: "Critical", validity: 730 },
+                { id: "CERT-003", train: "CR108", dept: "Track", status: "Valid", expiry: "2027-01-05", priority: "Low", validity: 180 },
+                { id: "CERT-004", train: "CR115", dept: "Rolling Stock", status: "Pending", expiry: "2025-09-30", priority: "High", validity: 365 },
+                { id: "CERT-005", train: "CR102", dept: "Electrical", status: "Valid", expiry: "2026-05-12", priority: "Medium", validity: 730 },
+                { id: "CERT-006", train: "CR120", dept: "Signaling", status: "Valid", expiry: "2028-02-18", priority: "Low", validity: 730 },
+                { id: "CERT-007", train: "CR111", dept: "Rolling Stock", status: "Renewal", expiry: "2025-10-05", priority: "High", validity: 365 },
+                { id: "CERT-008", train: "CR105", dept: "Track", status: "Valid", expiry: "2026-11-22", priority: "Medium", validity: 180 },
+                { id: "CERT-009", train: "CR109", dept: "Electrical", status: "Expired", expiry: "2025-09-01", priority: "Critical", validity: 730 }
+            ],
+            jobs: [
+                { id: "WO-001", train: "CR115", type: "Corrective", priority: "Critical", status: "Open", hours: 8, date: "2025-09-24" },
+                { id: "WO-002", train: "CR102", type: "Preventive", priority: "Medium", status: "In Progress", hours: 4, date: "2025-09-23" },
+                { id: "WO-003", train: "CR108", type: "Preventive", priority: "Low", status: "Completed", hours: 2, date: "2025-09-22" },
+                { id: "WO-004", train: "CR120", type: "Corrective", priority: "High", status: "Open", hours: 12, date: "2025-09-24" },
+                { id: "WO-005", train: "CR105", type: "Inspection", priority: "Medium", status: "Open", hours: 3, date: "2025-09-23" },
+                { id: "WO-006", train: "CR111", type: "Corrective", priority: "High", status: "Open", hours: 6, date: "2025-09-25" },
+                { id: "WO-007", train: "CR109", type: "Preventive", priority: "Low", status: "On Hold", hours: 2.5, date: "2025-09-25" }
+            ],
+             workers: [
+                { id: "W001", name: "Ramesh K.", duty: "Interior Cleaning", available: "Yes" },
+                { id: "W002", name: "Sita V.", duty: "Exterior Wash", available: "No" },
+                { id: "W003", name: "Arjun P.", duty: "Interior Cleaning", available: "Yes" },
+                { id: "W004", name: "Priya S.", duty: "Platform Duty", available: "Yes" },
+                { id: "W005", name: "Mohan D.", duty: "Exterior Wash", available: "Yes" },
+                { id: "W006", name: "Anjali M.", duty: "Interior Cleaning", available: "No" },
+            ],
+            mileage: [
+                { id: "CR118", usage: 92.5, priority: "Critical", component: "Motor", rec: "Reduce Usage", Bogie: 85, BrakePad: 95, HVAC: 70, Motor: 98 },
+                { id: "CR103", usage: 45.1, priority: "Low", component: "N/A", rec: "Increase Usage", Bogie: 40, BrakePad: 50, HVAC: 42, Motor: 48 },
+                { id: "CR114", usage: 88.0, priority: "High", component: "Brake Pad", rec: "Reduce Usage", Bogie: 90, BrakePad: 96, HVAC: 80, Motor: 85 },
+                { id: "CR107", usage: 55.2, priority: "Medium", component: "N/A", rec: "Normal Usage", Bogie: 50, BrakePad: 60, HVAC: 55, Motor: 58 },
+                { id: "CR122", usage: 95.0, priority: "Critical", component: "HVAC", rec: "Immediate Maint.", Bogie: 92, BrakePad: 91, HVAC: 99, Motor: 94 }
+            ],
+            depot: [
+                { id: "CR101", bay: "SB-01", type: "Standard_Stabling", exit_time: 15, shunting_moves: 2, energy_cost: 550 },
+                { id: "CR114", bay: "MB-03", type: "IBL_Maintenance", exit_time: 45, shunting_moves: 5, energy_cost: 950 },
+                { id: "CR108", bay: "SB-05", type: "Standard_Stabling", exit_time: 20, shunting_moves: 3, energy_cost: 600 },
+                { id: "CR121", bay: "CB-02", type: "Cleaning_Bay", exit_time: 60, shunting_moves: 4, energy_cost: 800 },
+                { id: "CR119", bay: "HMB-01", type: "Heavy_Maintenance", exit_time: 120, shunting_moves: 8, energy_cost: 1200 }
+            ],
+            schedule: [
+                {id: 'CR101', contract: 'Coca-Cola', start: '06:00', end: '22:00', route: 'Aluva-Petta', status: 'Planned', priority: 'High'},
+                {id: 'CR106', contract: 'Flipkart', start: '06:15', end: '21:15', route: 'Aluva-Petta', status: 'Needs Review', priority: 'Critical'},
+                {id: 'CR111', contract: 'Swiggy', start: '07:30', end: '23:30', route: 'Aluva-Petta', status: 'Proposed', priority: 'Medium'},
+                {id: 'CR116', contract: 'Myntra', start: '--', end: '--', route: '--', status: 'Maintenance', priority: 'Low'},
+                {id: 'CR103', contract: 'Amazon', start: '08:00', end: '20:00', route: 'Aluva-Petta', status: 'Planned', priority: 'Medium'},
+                {id: 'CR107', contract: 'Zomato', start: '09:00', end: '22:30', route: 'Aluva-Petta', status: 'Planned', priority: 'High'},
+            ],
+            priority: {
+                summary: { monitored: 24, avg_score: 45.2, critical: 2, high: 6, medium: 10, low: 6, jobs: 8 },
+                severity: { "Critical": 3, "High": 8, "Medium": 15, "Low": 5 },
+                top_trains: [
+                    { id: "CR114", score: 98.2, condition: 35.1, severity: "Critical", criticality: 10, time: 95 },
+                    { id: "CR118", score: 95.5, condition: 40.8, severity: "Critical", criticality: 9.8, time: 88 },
+                    { id: "CR102", score: 85.1, condition: 55.2, severity: "High", criticality: 8.5, time: 75 },
+                    { id: "CR110", score: 82.4, condition: 60.1, severity: "High", criticality: 8.1, time: 68 },
+                    { id: "CR123", score: 79.9, condition: 63.5, severity: "High", criticality: 7.9, time: 65 },
+                    { id: "CR105", score: 75.3, condition: 68.2, severity: "High", criticality: 7.5, time: 61 }
+                ]
+            },
+            inventory: {
+                summary: { total_parts: 50, needs_reorder: 12, reorder_rate: 24.0, critical_priority: 5, avg_lead_time: 18.5 },
+                parts: [
+                    { id: "P001", name: "HVAC Filter", category: "Mechanical", available: 3, reorder_level: 7, status: "reorder", criticality: "Medium", supplier: "UrbanRail Supplies", lead_time: 26, unit_cost: 48169 },
+                    { id: "P002", name: "Gear Box", category: "Electrical", available: 3, reorder_level: 6, status: "reorder", criticality: "Low", supplier: "UrbanRail Supplies", lead_time: 8, unit_cost: 23586 },
+                    { id: "P003", name: "Main Fuse", category: "HVAC", available: 14, reorder_level: 8, status: "sufficient", criticality: "High", supplier: "TechnoRail India", lead_time: 29, unit_cost: 43561 },
+                    { id: "P019", name: "Air Compressor", category: "Safety", available: 0, reorder_level: 5, status: "critical", criticality: "High", supplier: "RailTech Ltd", lead_time: 23, unit_cost: 23927 },
+                    { id: "P028", name: "Pantograph Shoe", category: "HVAC", available: 2, reorder_level: 6, status: "critical", criticality: "High", supplier: "TechnoRail India", lead_time: 25, unit_cost: 31626 },
+                    { id: "P039", name: "Suspension Spring", category: "Safety", available: 2, reorder_level: 9, status: "critical", criticality: "Medium", supplier: "ABC Spares", lead_time: 28, unit_cost: 10103 },
+                    { id: "P021", name: "Track Circuit Relay", category: "Mechanical", available: 6, reorder_level: 9, status: "reorder", criticality: "High", supplier: "MetroParts Co.", lead_time: 19, unit_cost: 24280 },
+                    { id: "P022", name: "Driver Display Panel", category: "HVAC", available: 4, reorder_level: 5, status: "reorder", criticality: "Medium", supplier: "UrbanRail Supplies", lead_time: 30, unit_cost: 7243 },
+                    { id: "P015", name: "HVAC Filter", category: "Electrical", available: 8, reorder_level: 10, status: "reorder", criticality: "High", supplier: "TechnoRail India", lead_time: 20, unit_cost: 36508 },
+                    { id: "P031", name: "Rectifier Unit", category: "HVAC", available: 9, reorder_level: 2, status: "sufficient", criticality: "High", supplier: "ABC Spares", lead_time: 25, unit_cost: 44517 },
+                    { id: "P050", name: "Brake Disc", category: "HVAC", available: 7, reorder_level: 4, status: "sufficient", criticality: "High", supplier: "TechnoRail India", lead_time: 26, unit_cost: 17419 },
+                    { id: "P035", name: "Battery Pack", category: "Safety", available: 8, reorder_level: 9, status: "reorder", criticality: "High", supplier: "MetroParts Co.", lead_time: 23, unit_cost: 2315 }
+                ],
+                categories: {
+                    "Mechanical": 12, "Electrical": 11, "HVAC": 15, "Safety": 12
+                },
+                suppliers: {
+                    "UrbanRail Supplies": 8, "TechnoRail India": 12, "RailTech Ltd": 14, "MetroParts Co.": 10, "ABC Spares": 6
+                }
+            }
+        };
+
+        // --- CHARTING LOGIC ---
+        const chartColors = {
+            dark: { textColor: '#E5E7EB', gridColor: '#374151', tooltipBg: 'rgba(31, 41, 55, 0.8)', borderColor: '#161B22' },
+            light: { textColor: '#1F2937', gridColor: '#E5E7EB', tooltipBg: 'rgba(255, 255, 255, 0.8)', borderColor: '#FFFFFF' }
+        };
+
+        const updateChartTheme = (chart, isLight) => {
+            if (!chart) return;
+            const colors = isLight ? chartColors.light : chartColors.dark;
+            chart.options.plugins.legend.labels.color = colors.textColor;
+            chart.options.plugins.tooltip.backgroundColor = colors.tooltipBg;
+            chart.options.plugins.tooltip.titleColor = colors.textColor;
+            chart.options.plugins.tooltip.bodyColor = colors.textColor;
+            if (chart.options.scales) {
+                Object.values(chart.options.scales).forEach(scale => {
+                    if(scale.ticks) scale.ticks.color = colors.textColor;
+                    if(scale.grid) scale.grid.color = colors.gridColor;
+                    if(scale.title) scale.title.color = colors.textColor;
+                });
+            }
+            if (['doughnut', 'pie'].includes(chart.config.type)) {
+                chart.data.datasets.forEach(dataset => dataset.borderColor = colors.borderColor);
+            }
+            chart.update();
+        };
+
+        const createChart = (ctx, config) => {
+            if (!ctx) return null;
+            const canvasId = ctx.canvas.id;
+            if (state.allCharts[canvasId]) state.allCharts[canvasId].destroy();
+            
+            const chart = new Chart(ctx, config);
+            state.allCharts[canvasId] = chart;
+            return chart;
+        };
+        
+        // --- PAGE INITIALIZERS ---
+        const initFleetOverview = () => {
+            if (state.allCharts['fleetAllocationChart'] && document.getElementById('fleetAllocationChart').dataset.rendered === "true") return;
+            const { summary, recommendations } = EMBEDDED_DATA.fleet_overview;
+            
+            document.getElementById('total-trains').textContent = summary.total_trains;
+            document.getElementById('service-ready').textContent = `${summary.service_ready} (${(summary.service_ready / summary.total_trains * 100).toFixed(1)}%)`;
+            document.getElementById('maintenance-required').textContent = `${summary.maintenance_required} (${(summary.maintenance_required / summary.total_trains * 100).toFixed(1)}%)`;
+            document.getElementById('standby').textContent = `${summary.standby} (${(summary.standby / summary.total_trains * 100).toFixed(1)}%)`;
+            document.getElementById('high-risk-trains').textContent = EMBEDDED_DATA.fleet_overview.ml_insights.high_risk_trains;
+            
+            const colors = state.isLightMode ? chartColors.light : chartColors.dark;
+            createChart(document.getElementById('fleetAllocationChart').getContext('2d'), { type: 'doughnut', data: { labels: ['Service Ready', 'Maintenance', 'Standby'], datasets: [{ data: [summary.service_ready, summary.maintenance_required, summary.standby], backgroundColor: ['#10B981', '#F59E0B', '#EF4444'], borderColor: colors.borderColor, borderWidth: 4, hoverOffset: 16 }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { position: 'bottom', labels: { color: colors.textColor, padding: 20 } }, tooltip: { backgroundColor: colors.tooltipBg, titleColor: colors.textColor, bodyColor: colors.textColor, padding: 10 } } } });
+            document.getElementById('fleetAllocationChart').dataset.rendered = "true";
+            
+            populateTable('recommendationsTable', recommendations, (r, index) => `<tr class="${index >= 5 ? 'hidden-row' : ''}"><td>${r.id}</td><td><span class="status-indicator ${r.action === 'Maintenance' ? 'status-yellow' : 'status-green'}">${r.action}</span></td><td>${r.priority.toFixed(1)}</td><td>${(r.confidence*100).toFixed(1)}%</td><td>${(r.risk*100).toFixed(1)}%</td></tr>`);
+        };
+
+        const initFitnessCerts = () => {
+             if (state.allCharts['certificateStatusChart'] && document.getElementById('certificateStatusChart').dataset.rendered === "true") return;
+            const data = EMBEDDED_DATA.certificates;
+
+            const updateStats = (filteredData) => {
+                const total = filteredData.length;
+                const statusCounts = filteredData.reduce((acc, row) => { acc[row.status] = (acc[row.status] || 0) + 1; return acc; }, {});
+                document.getElementById('total-certs').textContent = total;
+                document.getElementById('valid-certs').textContent = `${statusCounts.Valid || 0} (${(total > 0 ? (statusCounts.Valid || 0) / total * 100 : 0).toFixed(1)}%)`;
+                document.getElementById('expired-certs').textContent = `${statusCounts.Expired || 0} (${(total > 0 ? (statusCounts.Expired || 0) / total * 100 : 0).toFixed(1)}%)`;
+                document.getElementById('pending-certs').textContent = `${(statusCounts.Pending || 0) + (statusCounts.Renewal || 0)} (${(total > 0 ? ((statusCounts.Pending || 0) + (statusCounts.Renewal || 0)) / total * 100 : 0).toFixed(1)}%)`;
+            };
+
+            const populateCertTable = (filteredData) => {
+                const statusClasses = {'Valid': 'green', 'Expired': 'red', 'Pending': 'yellow', 'Renewal': 'orange'};
+                populateTable('certificatesTable', filteredData, (c, index) => `<tr class="${index >= 5 ? 'hidden-row' : ''}"><td>${c.id}</td><td>${c.train}</td><td>${c.dept}</td><td><span class="status-indicator status-${statusClasses[c.status]}">${c.status}</span></td><td>${c.expiry}</td><td>${c.priority}</td></tr>`);
+            };
+
+            const colors = state.isLightMode ? chartColors.light : chartColors.dark;
+            const statusCounts = data.reduce((acc, row) => { acc[row.status] = (acc[row.status] || 0) + 1; return acc; }, {});
+            createChart(document.getElementById('certificateStatusChart').getContext('2d'), { type: 'pie', data: { labels: Object.keys(statusCounts), datasets: [{ data: Object.values(statusCounts), backgroundColor: ['#10B981', '#EF4444', '#F59E0B', '#F97316'], borderColor: colors.borderColor }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: colors.textColor } }, tooltip: { backgroundColor: colors.tooltipBg } } } });
+            
+            const deptValidity = [...new Set(data.map(item => item.dept))].map(dept => {
+                const items = data.filter(item => item.dept === dept);
+                return { dept, avg: items.reduce((sum, item) => sum + item.validity, 0) / items.length };
+            });
+            createChart(document.getElementById('validityDepartmentChart').getContext('2d'), { type: 'bar', data: { labels: deptValidity.map(d => d.dept), datasets: [{ label: 'Avg Validity Days', data: deptValidity.map(d => d.avg), backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'] }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { ticks: { color: colors.textColor }, grid: { color: colors.gridColor } }, y: { ticks: { color: colors.textColor }, grid: { color: colors.gridColor } } }, plugins: { legend: { display: false }, tooltip: { backgroundColor: colors.tooltipBg } } } });
+            document.getElementById('certificateStatusChart').dataset.rendered = "true";
+
+            const deptFilter = document.getElementById('cert-dept-filter');
+            if(deptFilter.options.length <= 1) {
+                deptFilter.innerHTML += [...new Set(data.map(c => c.dept))].map(d => `<option value="${d}">${d}</option>`).join('');
+            }
+            const statusFilter = document.getElementById('cert-status-filter');
+            if(statusFilter.options.length <= 1) {
+                statusFilter.innerHTML += [...new Set(data.map(c => c.status))].map(s => `<option value="${s}">${s}</option>`).join('');
+            }
+            const searchFilter = document.getElementById('cert-search-filter');
+
+            const applyFilters = () => {
+                const dept = deptFilter.value;
+                const status = statusFilter.value;
+                const search = searchFilter.value.toLowerCase();
+                const filtered = data.filter(c => 
+                    (dept === 'All' || c.dept === dept) &&
+                    (status === 'All' || c.status === status) &&
+                    (c.train.toLowerCase().includes(search))
+                );
+                populateCertTable(filtered);
+                updateStats(filtered);
+            };
+            
+            deptFilter.onchange = applyFilters;
+            statusFilter.onchange = applyFilters;
+            searchFilter.oninput = applyFilters;
+
+            applyFilters();
+        };
+        
+        const initMaintenance = () => {
+            if (state.allCharts['jobStatusChart'] && document.getElementById('jobStatusChart').dataset.rendered === "true") return;
+            const jobs = EMBEDDED_DATA.jobs;
+           
+            const totalJobs = jobs.length;
+            const openJobs = jobs.filter(j => j.status === 'Open' || j.status === 'In Progress').length;
+            const criticalJobs = jobs.filter(j => j.priority === 'Critical' && j.status !== 'Completed').length;
+            const avgHours = (jobs.reduce((sum, j) => sum + j.hours, 0) / totalJobs).toFixed(1);
+
+            document.getElementById('total-jobs').textContent = totalJobs;
+            document.getElementById('open-jobs').textContent = openJobs;
+            document.getElementById('critical-jobs').textContent = criticalJobs;
+            document.getElementById('avg-hours').textContent = avgHours;
+
+            const colors = state.isLightMode ? chartColors.light : chartColors.dark;
+            const statusCounts = jobs.reduce((acc, row) => { acc[row.status] = (acc[row.status] || 0) + 1; return acc; }, {});
+            createChart(document.getElementById('jobStatusChart').getContext('2d'), { type: 'doughnut', data: { labels: Object.keys(statusCounts), datasets: [{ data: Object.values(statusCounts), backgroundColor: ['#F97316', '#3B82F6', '#10B981', '#9CA3AF'], borderColor: colors.borderColor }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { position: 'bottom', labels: { color: colors.textColor } }, tooltip: { backgroundColor: colors.tooltipBg } } } });
+            
+            const priorityCounts = jobs.reduce((acc, row) => { acc[row.priority] = (acc[row.priority] || 0) + 1; return acc; }, {});
+            createChart(document.getElementById('jobPriorityChart').getContext('2d'), { type: 'bar', data: { labels: Object.keys(priorityCounts), datasets: [{ label: 'Jobs', data: Object.values(priorityCounts), backgroundColor: ['#EF4444', '#F97316', '#F59E0B', '#10B981'] }] }, options: { responsive: true, maintainAspectRatio: false, scales: { x: { ticks: { color: colors.textColor }, grid: { color: colors.gridColor } }, y: { ticks: { color: colors.textColor }, grid: { color: colors.gridColor } } }, plugins: { legend: { display: false }, tooltip: { backgroundColor: colors.tooltipBg } } } });
+            document.getElementById('jobStatusChart').dataset.rendered = "true";
+            
+            const jobsTableBody = document.getElementById('jobsTable').getElementsByTagName('tbody')[0];
+            jobsTableBody.innerHTML = '';
+            const priorityClasses = {'Critical': 'red', 'High': 'orange', 'Medium': 'yellow', 'Low': 'green'};
+            const jobStatusClasses = {'Open': 'orange', 'In Progress': 'blue', 'Completed': 'green', 'On Hold': 'grey'};
+            
+            jobs.forEach((j, index) => {
+                const row = jobsTableBody.insertRow();
+                if(index >= 5) row.classList.add('hidden-row');
+                row.dataset.jobId = j.id;
+                row.innerHTML = `<td>${j.id}</td><td>${j.train}</td><td>${j.type}</td><td><span class="status-indicator status-${priorityClasses[j.priority]}">${j.priority}</span></td><td class="status-cell"><span class="status-indicator status-${jobStatusClasses[j.status]}">${j.status}</span></td><td>${j.hours}</td><td>${j.date}</td><td class="actions"><button class="action-btn download-btn" title="Download Job Card"><i class="fas fa-download"></i></button><button class="action-btn complete-btn" title="Mark as Done"><i class="fas fa-check-circle"></i></button></td>`;
+                row.querySelector('.download-btn').addEventListener('click', () => downloadJobCard(j));
+                row.querySelector('.complete-btn').addEventListener('click', (e) => markJobDone(e.currentTarget));
+                if (j.status === 'Completed') markJobDone(row.querySelector('.complete-btn'), true);
+            });
+        };
+
+        const downloadJobCard = (jobData) => {
+            const cardContent = `KMRL JOB CARD\n---------------------------------\nWork Order ID: ${jobData.id}\nTrain ID:      ${jobData.train}\nDate Created:  ${jobData.date}\n---------------------------------\nWork Type:     ${jobData.type}\nPriority:      ${jobData.priority}\nStatus:        ${jobData.status}\nEst. Hours:    ${jobData.hours}\n---------------------------------`;
+            const blob = new Blob([cardContent.trim()], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `JobCard_${jobData.id}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast(`Downloaded Job Card ${jobData.id}`, 'success');
+        };
+
+        const markJobDone = (button, isInitial = false) => {
+            const row = button.closest('tr');
+            if (row.classList.contains('completed') && !isInitial) return;
+            
+            row.classList.add('completed');
+            button.classList.add('done');
+            button.disabled = true;
+            row.querySelector('.status-cell').innerHTML = `<span class="status-indicator status-green">Completed</span>`;
+            
+            if(!isInitial) showToast(`Job ${row.dataset.jobId} marked as complete!`, 'success');
+        };
+        
+        const initCleaning = () => {
+             if (state.allCharts['workerAvailabilityChart'] && document.getElementById('workerAvailabilityChart').dataset.rendered === "true") return;
+             const workers = EMBEDDED_DATA.workers;
+             const availableWorkers = workers.filter(w => w.available === 'Yes').length;
+             const trainsToClean = EMBEDDED_DATA.depot.filter(t => t.type === 'Cleaning_Bay').length;
+
+             document.getElementById('total-workers').textContent = workers.length;
+             document.getElementById('available-workers').textContent = availableWorkers;
+             document.getElementById('trains-to-clean').textContent = trainsToClean;
+             document.getElementById('assignments-made').textContent = 0;
+
+
+             const colors = state.isLightMode ? chartColors.light : chartColors.dark;
+             const availabilityCounts = workers.reduce((acc, row) => { acc[row.available] = (acc[row.available] || 0) + 1; return acc; }, {});
+             createChart(document.getElementById('workerAvailabilityChart').getContext('2d'), { type: 'pie', data: { labels: ['Available', 'Unavailable'], datasets: [{ data: [availabilityCounts.Yes, availabilityCounts.No], backgroundColor: ['#10B981', '#EF4444'], borderColor: colors.borderColor }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: colors.textColor } }, tooltip: { backgroundColor: colors.tooltipBg } } } });
+             
+             const dutyCounts = workers.reduce((acc, row) => { acc[row.duty] = (acc[row.duty] || 0) + 1; return acc; }, {});
+             createChart(document.getElementById('workerDutyChart').getContext('2d'), { type: 'bar', data: { labels: Object.keys(dutyCounts), datasets: [{ label: 'Workers', data: Object.values(dutyCounts), backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#F97316'] }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { ticks: { color: colors.textColor }, grid: { color: colors.gridColor } }, y: { ticks: { color: colors.textColor }, grid: { color: colors.gridColor } } }, plugins: { legend: { display: false }, tooltip: { backgroundColor: colors.tooltipBg } } } });
+             document.getElementById('workerAvailabilityChart').dataset.rendered = "true";
+
+            document.getElementById('cleaningAssignments').innerHTML = '<h3>Smart Assignment Results</h3> <p style="color:var(--text-dark-secondary)">Click "Auto-Assign" to generate cleaning slots.</p>';
+        };
+        
+        const initMileage = () => {
+            if (state.allCharts['componentUsageChart'] && document.getElementById('componentUsageChart').dataset.rendered === "true") return;
+            const data = EMBEDDED_DATA.mileage;
+           
+            document.getElementById('avg-usage').textContent = `${(data.reduce((sum, d) => sum + d.usage, 0) / data.length).toFixed(1)}%`;
+            document.getElementById('high-wear').textContent = data.filter(d => d.priority === 'High' || d.priority === 'Critical').length;
+            document.getElementById('mileage-critical').textContent = data.filter(d => d.priority === 'Critical').length;
+
+            const colors = state.isLightMode ? chartColors.light : chartColors.dark;
+            const componentUsage = {
+                Bogie: data.map(r => r.Bogie).reduce((a,b) => a+b, 0) / data.length,
+                BrakePad: data.map(r => r.BrakePad).reduce((a,b) => a+b, 0) / data.length,
+                HVAC: data.map(r => r.HVAC).reduce((a,b) => a+b, 0) / data.length,
+                Motor: data.map(r => r.Motor).reduce((a,b) => a+b, 0) / data.length,
+            };
+            createChart(document.getElementById('componentUsageChart').getContext('2d'), { type: 'bar', data: { labels: Object.keys(componentUsage), datasets: [{ label: 'Avg Usage %', data: Object.values(componentUsage), backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'] }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } } });
+            
+            const priorityCounts = data.reduce((acc, row) => { acc[row.priority] = (acc[row.priority] || 0) + 1; return acc; }, {});
+            createChart(document.getElementById('mileagePriorityChart').getContext('2d'), { type: 'doughnut', data: { labels: Object.keys(priorityCounts), datasets: [{ data: Object.values(priorityCounts), backgroundColor: ['#EF4444', '#F97316', '#F59E0B', '#10B981'], borderColor: colors.borderColor }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { position: 'bottom' } } } });
+            document.getElementById('componentUsageChart').dataset.rendered = "true";
+
+            const priorityClasses = {'Critical': 'red', 'High': 'orange', 'Medium': 'yellow', 'Low': 'green'};
+            populateTable('balancingTable', data, (b, index) => `<tr class="${index >= 5 ? 'hidden-row' : ''}"><td>${b.id}</td><td>${b.usage}%</td><td><span class="status-indicator status-${priorityClasses[b.priority]}">${b.priority}</span></td><td>${b.component}</td><td>${b.rec}</td></tr>`);
+        };
+
+        const initDepot = () => {
+            if (state.allCharts['depotMapChart'] && document.getElementById('depotMapChart').dataset.rendered === "true") return;
+            const data = EMBEDDED_DATA.depot;
+
+            const colors = state.isLightMode ? chartColors.light : chartColors.dark;
+
+            const depotData = [
+                {x: 12, y: 8, r: 30, type: 'Service', label: 'Standard Stabling'},
+                {x: 18, y: 10, r: 20, type: 'Maintenance', label: 'IBL Maintenance'},
+                {x: 22, y: 15, r: 15, type: 'Maintenance', label: 'Heavy Maintenance'},
+                {x: 6, y: 6, r: 18, type: 'Service', label: 'Cleaning Bays'},
+            ];
+            createChart(document.getElementById('depotMapChart').getContext('2d'), { type: 'bubble', data: { datasets: depotData.map(d => ({ label: d.label, data: [{x: d.x, y: d.y, r: d.r}], backgroundColor: d.type === 'Service' ? 'rgba(16, 185, 129, 0.7)' : 'rgba(249, 115, 22, 0.7)', })) }, options: { responsive: true, maintainAspectRatio: false, scales: { x: { grid: { color: colors.gridColor } }, y: { grid: { color: colors.gridColor } } }, plugins: { legend: { position: 'bottom', labels: { color: colors.textColor } } } } });
+            
+            const scatterData = data.map(d => ({ x: d.exit_time, y: d.shunting_moves, r: d.energy_cost / 50 }));
+            createChart(document.getElementById('trainPositionChart').getContext('2d'), { type: 'scatter', data: { datasets: [{ label: 'Trains', data: scatterData, backgroundColor: 'rgba(59, 130, 246, 0.7)' }] }, options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: {display: true, text: 'Exit Time (min)', color: colors.textColor}}, y: { title: {display: true, text: 'Shunting Moves', color: colors.textColor}} }, plugins: { legend: { display: false } } } });
+            document.getElementById('depotMapChart').dataset.rendered = "true";
+        };
+        
+        const initScheduling = () => {
+             if (state.allCharts['contractPriorityChart'] && document.getElementById('contractPriorityChart').dataset.rendered === "true") return;
+             const schedule = EMBEDDED_DATA.schedule;
+             
+             const statusCounts = schedule.reduce((acc, row) => { acc[row.status] = (acc[row.status] || 0) + 1; return acc; }, {});
+             document.getElementById('confirmed-plans').textContent = `${statusCounts.Planned || 0} / ${schedule.length}`;
+             document.getElementById('awaiting-approval').textContent = statusCounts.Proposed || 0;
+             document.getElementById('needs-review').textContent = statusCounts['Needs Review'] || 0;
+             document.getElementById('maint-schedule').textContent = statusCounts.Maintenance || 0;
+             
+             const colors = state.isLightMode ? chartColors.light : chartColors.dark;
+             const priorityCounts = schedule.reduce((acc, row) => { acc[row.priority] = (acc[row.priority] || 0) + 1; return acc; }, {});
+             createChart(document.getElementById('contractPriorityChart').getContext('2d'), { type: 'pie', data: { labels: Object.keys(priorityCounts), datasets: [{ data: Object.values(priorityCounts), backgroundColor: ['#EF4444', '#F97316', '#F59E0B', '#10B981'], borderColor: colors.borderColor }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } } });
+            
+              createChart(document.getElementById('scheduleStatusChart').getContext('2d'), { type: 'bar', data: { labels: Object.keys(statusCounts), datasets: [{ label: 'Trains', data: Object.values(statusCounts), backgroundColor: ['#10B981', '#F59E0B', '#EF4444', '#9CA3AF'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
+              document.getElementById('contractPriorityChart').dataset.rendered = "true";
+
+            const scheduleStatusClasses = {'Planned': 'green', 'Needs Review': 'red', 'Proposed': 'yellow', 'Maintenance': 'grey'};
+            const priorityClasses = {'Critical': 'red', 'High': 'orange', 'Medium': 'yellow', 'Low': 'green'};
+            populateTable('scheduleTable', schedule, s => `<tr><td>${s.id}</td><td>${s.contract}</td><td>${s.start}</td><td>${s.end}</td><td>${s.route}</td><td><span class="status-indicator status-${scheduleStatusClasses[s.status]}">${s.status}</span></td><td><span class="status-indicator status-${priorityClasses[s.priority]}">${s.priority}</span></td></tr>`);
+        };
+        
+        const initML = () => {
+            if (state.allCharts['featureImportanceChart'] && document.getElementById('featureImportanceChart').dataset.rendered === "true") return;
+            const data = EMBEDDED_DATA.fleet_overview.recommendations;
+            
+            const colors = state.isLightMode ? chartColors.light : chartColors.dark;
+            const featureImportance = { 'Vibration_Motor': 0.25, 'Temp_Bogie': 0.22, 'Current_Draw': 0.18, 'Brake_Pressure': 0.15, 'HVAC_Runtime': 0.12, 'Door_Cycles': 0.08 };
+            createChart(document.getElementById('featureImportanceChart').getContext('2d'), { type: 'bar', data: { labels: Object.keys(featureImportance), datasets: [{ label: 'Importance', data: Object.values(featureImportance), backgroundColor: '#3B82F6' }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } } } });
+
+            const riskData = data.map(t => t.risk);
+            const riskBins = [0, 0, 0, 0, 0];
+            riskData.forEach(r => {
+                if (r <= 0.2) riskBins[0]++; else if (r <= 0.4) riskBins[1]++; else if (r <= 0.6) riskBins[2]++; else if (r <= 0.8) riskBins[3]++; else riskBins[4]++;
+            });
+            createChart(document.getElementById('failureRiskChart').getContext('2d'), { type: 'bar', data: { labels: ['0-20%', '20-40%', '40-60%', '60-80%', '80-100%'], datasets: [{ label: 'Trains', data: riskBins, backgroundColor: '#F97316' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
+            
+            const mlDecisions = { 'Service-Service': 0, 'Maintenance-Service': 0, 'Service-Maintenance': 0, 'Maintenance-Maintenance': 0 };
+            data.forEach(t => {
+                const mlDecision = t.priority > 50 ? 'Maintenance' : 'Service';
+                mlDecisions[`${mlDecision}-${t.action}`]++;
+            });
+            createChart(document.getElementById('mlDecisionChart').getContext('2d'), { type: 'bar', data: { labels: ['ML: Service', 'ML: Maintenance'], datasets: [ { label: 'Final: Service', data: [mlDecisions['Service-Service'], mlDecisions['Maintenance-Service']], backgroundColor: '#10B981'}, { label: 'Final: Maintenance', data: [mlDecisions['Service-Maintenance'], mlDecisions['Maintenance-Maintenance']], backgroundColor: '#F59E0B'} ] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } } });
+            document.getElementById('featureImportanceChart').dataset.rendered = "true";
+
+        };
+        
+        const initPriority = () => {
+             if (state.allCharts['fleetPriorityChart'] && document.getElementById('fleetPriorityChart').dataset.rendered === "true") return;
+             const data = EMBEDDED_DATA.priority;
+             
+            document.getElementById('prio-monitored').textContent = data.summary.monitored;
+            document.getElementById('prio-avg').textContent = data.summary.avg_score;
+            document.getElementById('prio-critical').textContent = data.summary.critical;
+            document.getElementById('prio-jobs').textContent = data.summary.jobs;
+             
+            const colors = state.isLightMode ? chartColors.light : chartColors.dark;
+            const priorityCounts = [data.summary.critical, data.summary.high, data.summary.medium, data.summary.low];
+            createChart(document.getElementById('fleetPriorityChart').getContext('2d'), { type: 'pie', data: { labels: ['Critical', 'High', 'Medium', 'Low'], datasets: [{ data: priorityCounts, backgroundColor: ['#EF4444', '#F97316', '#F59E0B', '#10B981'], borderColor: colors.borderColor }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } } });
+             
+             createChart(document.getElementById('faultSeverityChart').getContext('2d'), { type: 'bar', data: { labels: Object.keys(data.severity), datasets: [{ label: 'Faults', data: Object.values(data.severity), backgroundColor: ['#EF4444', '#F97316', '#F59E0B', '#10B981'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
+             document.getElementById('fleetPriorityChart').dataset.rendered = "true";
+
+            const sevClasses = {'Critical': 'red', 'High': 'orange'};
+            populateTable('priorityTable', data.top_trains, (p, index) => `<tr class="${index >= 5 ? 'hidden-row' : ''}"><td>${p.id}</td><td>${p.score.toFixed(1)}</td><td>${p.condition.toFixed(1)}</td><td><span class="status-indicator status-${sevClasses[p.severity]}">${p.severity}</span></td><td>${p.criticality}</td><td>${p.time} days</td></tr>`);
+        };
+        
+        const initScenario = () => {
+            const selector = document.getElementById('scenarioSelector');
+            const contentDiv = document.getElementById('scenario-content');
+            
+            const scenarios = {
+                critical: { risk: 'EXTREME', riskClass: 'scenario-extreme', immediate: ['Service Disruption on CR114', '15-30 min delays', '3-5x higher emergency repair costs'], longTerm: ['Cascading failures on other trains', '200% maintenance backlog increase', 'Fleet reliability drops 15%'], cost: { emergency: 8, revenue: 0.8, total: 14 } },
+                high: { risk: 'HIGH', riskClass: 'scenario-high', immediate: ['8 trains at increased risk', '1-2 likely failures', 'Service reliability drops to 75%'], longTerm: ['10-15% of fleet needing urgent repair', 'Expedited parts procurement at high cost', '10-20% ridership decline'], cost: { emergency: 25, revenue: 2, total: 39 } },
+                week: { risk: 'VERY HIGH', riskClass: 'scenario-very-high', immediate: ['Increased chance of multiple failures', '15-20% service reduction', 'Higher breakdown risk during service'], longTerm: ['Management scrutiny and internal audits', 'Recovery time of 4-8 weeks', '₹80-120 lakhs in recovery expenses'], cost: { emergency: 45, revenue: 6, total: 87 } },
+                certs: { risk: 'EXTREME', riskClass: 'scenario-extreme', immediate: ['Immediate service suspension', 'Fines and penalties for non-compliance', 'Trains grounded until renewal'], longTerm: ['₹15-40 lakhs in regulatory fines', 'Public trust and credibility issues', '6-10 week expedited renewal process'], cost: { emergency: 15, revenue: 8, total: 71 } },
+            };
+            
+            const renderScenario = (key) => {
+                const s = scenarios[key];
+                contentDiv.innerHTML = `<div class="scenario-card ${s.riskClass}"><h4>Risk Level: ${s.risk}</h4></div><div class="consequence-grid"><div class="consequence-card"><h4><i class="fas fa-exclamation-circle text-red"></i> Immediate Consequences</h4><ul>${s.immediate.map(item => `<li><i class="fas fa-arrow-right"></i> ${item}</li>`).join('')}</ul></div><div class="consequence-card"><h4><i class="fas fa-fire" style="color:var(--orange);"></i> Long-term Impact</h4><ul>${s.longTerm.map(item => `<li><i class="fas fa-arrow-right"></i> ${item}</li>`).join('')}</ul></div></div><div class="stats-grid" style="margin-top:1.5rem;"><div class="stat-card"><div class="card-icon" style="color:var(--red)"><i class="fas fa-dollar-sign"></i></div><div class="card-info"><p>Emergency Repair Costs</p><span>₹${s.cost.emergency} lakhs</span></div></div><div class="stat-card"><div class="card-icon" style="color:var(--orange)"><i class="fas fa-chart-area"></i></div><div class="card-info"><p>Daily Revenue Loss</p><span>₹${s.cost.revenue} lakhs/day</span></div></div><div class="stat-card"><div class="card-icon" style="color:var(--red)"><i class="fas fa-calculator"></i></div><div class="card-info"><p>Week 1 Total Impact</p><span>₹${s.cost.total} lakhs</span></div></div></div>`;
+            }
+            selector.onchange = (e) => renderScenario(e.target.value);
+            renderScenario(selector.value);
+        };
+        
+        const initInventory = () => {
+            if (state.allCharts['stockStatusChart'] && document.getElementById('stockStatusChart').dataset.rendered === "true") return;
+            const inventory = EMBEDDED_DATA.inventory;
+            
+            // Update stats
+            document.getElementById('total-parts').textContent = inventory.summary.total_parts;
+            document.getElementById('needs-reorder').textContent = `${inventory.summary.needs_reorder} (${inventory.summary.reorder_rate}%)`;
+            document.getElementById('critical-priority-parts').textContent = inventory.summary.critical_priority;
+            document.getElementById('avg-lead-time').textContent = `${inventory.summary.avg_lead_time} days`;
+            
+            // Critical reorder alerts
+            const criticalParts = inventory.parts.filter(p => p.status === 'critical');
+            const alertsDiv = document.getElementById('critical-reorder-alerts');
+            if (criticalParts.length > 0) {
+                alertsDiv.innerHTML = criticalParts.map(part => 
+                    `<div class="alert-item" style="background-color: var(--bg-dark-secondary); border: 1px solid var(--red); border-radius: 8px; padding: 1rem; margin-bottom: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-exclamation-triangle" style="color: var(--red); font-size: 1.2rem;"></i>
+                            <div style="flex-grow: 1;">
+                                <strong style="color: var(--text-dark);">${part.name} (${part.id})</strong>
+                                <p style="color: var(--text-dark-secondary); margin: 0.25rem 0 0 0; font-size: 0.9rem;">
+                                    Stock: ${part.available} | Reorder Level: ${part.reorder_level} | Lead Time: ${part.lead_time} days | Supplier: ${part.supplier}
+                                </p>
+                            </div>
+                            <span class="status-indicator status-red" style="white-space: nowrap;">CRITICAL</span>
+                        </div>
+                    </div>`
+                ).join('');
+            } else {
+                alertsDiv.innerHTML = '<p style="color: var(--text-dark-secondary); text-align: center; padding: 1rem;">No critical reorder alerts at this time.</p>';
+            }
+            
+            const colors = state.isLightMode ? chartColors.light : chartColors.dark;
+            
+            // Stock Status Chart
+            const statusCounts = {
+                'Sufficient Stock': inventory.parts.filter(p => p.status === 'sufficient').length,
+                'Needs Reorder': inventory.parts.filter(p => p.status === 'reorder').length,
+                'Critical': inventory.parts.filter(p => p.status === 'critical').length
+            };
+            createChart(document.getElementById('stockStatusChart').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(statusCounts),
+                    datasets: [{
+                        data: Object.values(statusCounts),
+                        backgroundColor: ['#10B981', '#F59E0B', '#EF4444'],
+                        borderColor: colors.borderColor
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: colors.textColor } },
+                        tooltip: { backgroundColor: colors.tooltipBg }
+                    }
+                }
+            });
+            
+            // Category Distribution Chart
+            createChart(document.getElementById('categoryDistributionChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(inventory.categories),
+                    datasets: [{
+                        label: 'Parts Count',
+                        data: Object.values(inventory.categories),
+                        backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { ticks: { color: colors.textColor }, grid: { color: colors.gridColor } },
+                        y: { ticks: { color: colors.textColor }, grid: { color: colors.gridColor } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { backgroundColor: colors.tooltipBg }
+                    }
+                }
+            });
+            
+            // Supplier Performance Chart
+            createChart(document.getElementById('supplierPerformanceChart').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(inventory.suppliers),
+                    datasets: [{
+                        data: Object.values(inventory.suppliers),
+                        backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'],
+                        borderColor: colors.borderColor
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: colors.textColor } },
+                        tooltip: { backgroundColor: colors.tooltipBg }
+                    }
+                }
+            });
+            
+            // Criticality vs Lead Time Scatter
+            const criticalityMapping = { 'High': 3, 'Medium': 2, 'Low': 1 };
+            const scatterData = inventory.parts.map(part => ({
+                x: part.lead_time,
+                y: criticalityMapping[part.criticality] || 1,
+                label: part.name,
+                backgroundColor: part.status === 'critical' ? '#EF4444' : (part.status === 'reorder' ? '#F59E0B' : '#10B981')
+            }));
+            
+            createChart(document.getElementById('criticalityLeadTimeChart').getContext('2d'), {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Parts',
+                        data: scatterData,
+                        backgroundColor: scatterData.map(d => d.backgroundColor),
+                        pointRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Lead Time (days)', color: colors.textColor },
+                            ticks: { color: colors.textColor },
+                            grid: { color: colors.gridColor }
+                        },
+                        y: {
+                            title: { display: true, text: 'Criticality Level', color: colors.textColor },
+                            ticks: {
+                                color: colors.textColor,
+                                callback: function(value) {
+                                    const labels = { 1: 'Low', 2: 'Medium', 3: 'High' };
+                                    return labels[value] || value;
+                                }
+                            },
+                            grid: { color: colors.gridColor },
+                            min: 0.5,
+                            max: 3.5
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: colors.tooltipBg,
+                            callbacks: {
+                                title: function(context) {
+                                    return context[0].raw.label;
+                                },
+                                label: function(context) {
+                                    const criticalityLabels = { 1: 'Low', 2: 'Medium', 3: 'High' };
+                                    return [`Lead Time: ${context.parsed.x} days`, `Criticality: ${criticalityLabels[context.parsed.y]}`];
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            document.getElementById('stockStatusChart').dataset.rendered = "true";
+            
+            // Populate inventory table with filters
+            const populateInventoryTable = (filteredData) => {
+                const statusClasses = { 'critical': 'red', 'reorder': 'orange', 'sufficient': 'green' };
+                const criticalityClasses = { 'High': 'red', 'Medium': 'yellow', 'Low': 'green' };
+                populateTable('inventoryTable', filteredData, (part, index) => 
+                    `<tr class="${index >= 10 ? 'hidden-row' : ''}">
+                        <td>${part.id}</td>
+                        <td>${part.name}</td>
+                        <td>${part.category}</td>
+                        <td>${part.available}</td>
+                        <td>${part.reorder_level}</td>
+                        <td><span class="status-indicator status-${statusClasses[part.status]}">${part.status.charAt(0).toUpperCase() + part.status.slice(1)}</span></td>
+                        <td><span class="status-indicator status-${criticalityClasses[part.criticality]}">${part.criticality}</span></td>
+                        <td>${part.supplier}</td>
+                        <td>${part.lead_time} days</td>
+                        <td>₹${part.unit_cost.toLocaleString()}</td>
+                    </tr>`
+                );
+            };
+            
+            // Setup filters
+            const categoryFilter = document.getElementById('inventory-category-filter');
+            const criticalityFilter = document.getElementById('inventory-criticality-filter');
+            const statusFilter = document.getElementById('inventory-status-filter');
+            const searchFilter = document.getElementById('inventory-search-filter');
+            
+            const applyInventoryFilters = () => {
+                const category = categoryFilter.value;
+                const criticality = criticalityFilter.value;
+                const status = statusFilter.value;
+                const search = searchFilter.value.toLowerCase();
+                
+                const filtered = inventory.parts.filter(part => 
+                    (category === 'All' || part.category === category) &&
+                    (criticality === 'All' || part.criticality === criticality) &&
+                    (status === 'All' || (status === 'needs_reorder' ? (part.status === 'reorder' || part.status === 'critical') : part.status === 'sufficient')) &&
+                    (part.name.toLowerCase().includes(search) || part.id.toLowerCase().includes(search))
+                );
+                
+                populateInventoryTable(filtered);
+            };
+            
+            categoryFilter.onchange = applyInventoryFilters;
+            criticalityFilter.onchange = applyInventoryFilters;
+            statusFilter.onchange = applyInventoryFilters;
+            searchFilter.oninput = applyInventoryFilters;
+            
+            // Initial population
+            applyInventoryFilters();
+        };
+        
+        // --- Chart Initializer Mapping ---
+        const chartInitializers = {
+            'fleet-overview': initFleetOverview, 'fitness-certs': initFitnessCerts, 'maintenance': initMaintenance,
+            'cleaning': initCleaning, 'mileage': initMileage, 'depot': initDepot, 'scheduling': initScheduling,
+            'ml-insights': initML, 'priority': initPriority, 'scenario': initScenario, 'inventory': initInventory
+        };
+        
+        const populateTable = (tableId, data, rowTemplate) => {
+            const tableBody = document.getElementById(tableId)?.getElementsByTagName('tbody')[0];
+            if (tableBody) tableBody.innerHTML = data.map(rowTemplate).join('');
+        };
+
+        document.querySelectorAll('.view-all-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const tableId = button.dataset.table;
+                const table = document.getElementById(tableId);
+                const tbody = table.querySelector('tbody');
+                const hiddenRows = tbody.querySelectorAll('.hidden-row');
+                const isExpanded = button.textContent === 'Show Less';
+                hiddenRows.forEach(row => row.style.display = isExpanded ? 'none' : 'table-row');
+                button.textContent = isExpanded ? 'View All' : 'Show Less';
+            });
+        });
+
+        // --- INTERACTIVE PAGE LOGIC ---
+        document.getElementById('auto-assign-btn').addEventListener('click', () => {
+            const assignmentsDiv = document.getElementById('cleaningAssignments');
+            assignmentsDiv.innerHTML = '<h3><i class="fas fa-spinner fa-spin"></i> Generating Optimal Assignments...</h3>';
+            
+            setTimeout(() => {
+                const workers = EMBEDDED_DATA.workers;
+                const trains = EMBEDDED_DATA.depot.filter(t => t.type === 'Cleaning_Bay');
+                const availableWorkers = workers.filter(w => w.available === 'Yes');
+                
+                if (trains.length === 0 || availableWorkers.length === 0) {
+                    assignmentsDiv.innerHTML = '<h3>Smart Assignment Results</h3><p style="color:var(--text-dark-secondary)">No trains need cleaning or no workers are available.</p>';
+                    return;
+                }
+
+                let assignmentsHTML = '<h3>Smart Assignment Results</h3>';
+                const assignmentsMade = Math.min(trains.length, availableWorkers.length);
+                document.getElementById('assignments-made').textContent = assignmentsMade;
+                
+                for(let i=0; i<assignmentsMade; i++) {
+                    assignmentsHTML += `<div class="assignment-card"><div class="assignment-header"><i class="fas fa-check-circle" style="color:var(--green)"></i> ${trains[i].id} &rarr; ${availableWorkers[i].name}</div><div class="assignment-body"><div><strong>Task</strong><span>Complete Clean</span></div><div><strong>Time</strong><span>90 min</span></div><div><strong>Confidence</strong><span>92.5%</span></div></div></div>`;
+                }
+                assignmentsDiv.innerHTML = assignmentsHTML;
+                showToast(`${assignmentsMade} cleaning slots assigned!`, 'success');
+            }, 1000); // Simulate processing
+        });
+
+        document.getElementById('refresh-assignments-btn').addEventListener('click', () => {
+            document.getElementById('cleaningAssignments').innerHTML = '<h3>Smart Assignment Results</h3><p style="color:var(--text-dark-secondary)">Assignments cleared. Click "Auto-Assign" to generate new slots.</p>';
+            document.getElementById('assignments-made').textContent = 0;
+            showToast('Assignments refreshed.', 'info');
+        });
+
+        document.getElementById('save-schedule-btn').addEventListener('click', () => {
+            showToast('Schedule saved and confirmed!', 'success');
+        });
+        
+        // --- INITIAL LOAD ---
+        const checkLoginStatus = () => {
+            const loggedInUser = sessionStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                state.currentUser = JSON.parse(loggedInUser);
+                showDashboard(state.currentUser);
+                applyTheme(state.isLightMode);
+                updateTimestamp();
+                const initialHash = window.location.hash || '#fleet-overview';
+                changePage(initialHash);
+            } else {
+                showLoginPage();
+                 applyTheme(state.isLightMode); // Apply theme even on login page
+            }
+        };
+
+        checkLoginStatus();
+    });
+    </script>
+
+
+
+</body>
+</html>

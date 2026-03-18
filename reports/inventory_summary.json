@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-09-28T12:56:29.267463Z",
+  "total_parts": 50,
+  "needs_reorder": 14,
+  "reorder_percentage": 28.0,
+  "critical_priority": 7,
+  "avg_lead_time_days": 21.5,
+  "category_breakdown": {
+    "HVAC": 5,
+    "Safety": 4,
+    "Electrical": 3,
+    "Mechanical": 2
+  },
+  "supplier_breakdown": {
+    "MetroParts Co.": 4,
+    "UrbanRail Supplies": 3,
+    "RailTech Ltd": 3,
+    "TechnoRail India": 2,
+    "ABC Spares": 2
+  },
+  "system": "KMRL Inventory Management",
+  "version": "1.0.0"
+}

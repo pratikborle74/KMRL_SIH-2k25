@@ -1,0 +1,25 @@
+Train_ID,Overall_Priority,Priority_Score,Action_Required,Critical_Jobs,Total_Jobs,Expired_Certificates,Total_Certificates,Average_Usage_Pct,Health_Score,Temperature_C,Analysis_Date
+CR101,Low,5,Normal Operations,0,4,0,1,32.0,0.745,51.3,2025-09-19 22:33:02
+CR102,High,55,Schedule Soon,1,3,0,2,53.4,0.889,53.0,2025-09-19 22:33:02
+CR103,High,45,Schedule Soon,1,5,0,2,39.0,0.96,58.5,2025-09-19 22:33:02
+CR104,High,45,Schedule Soon,1,5,0,1,49.7,0.779,49.1,2025-09-19 22:33:02
+CR105,High,55,Schedule Soon,1,3,0,2,52.6,0.713,72.7,2025-09-19 22:33:02
+CR106,Low,5,Normal Operations,0,5,0,2,39.7,0.936,62.9,2025-09-19 22:33:02
+CR107,Low,5,Normal Operations,0,2,0,2,45.9,0.755,57.9,2025-09-19 22:33:02
+CR108,Medium,30,Monitor,0,5,1,2,45.7,0.704,62.9,2025-09-19 22:33:02
+CR109,High,55,Schedule Soon,1,2,0,1,54.8,0.82,63.2,2025-09-19 22:33:02
+CR110,Medium,30,Monitor,0,2,1,2,48.2,0.816,53.5,2025-09-19 22:33:02
+CR111,Low,15,Normal Operations,0,2,0,1,37.5,0.633,84.6,2025-09-19 22:33:02
+CR112,Low,15,Normal Operations,0,5,0,1,51.6,0.776,60.8,2025-09-19 22:33:02
+CR113,High,55,Schedule Soon,1,4,0,1,53.7,0.806,57.7,2025-09-19 22:33:02
+CR114,Critical,70,Immediate,2,5,1,1,35.9,0.809,52.7,2025-09-19 22:33:02
+CR115,High,55,Schedule Soon,1,5,0,1,54.8,0.829,53.9,2025-09-19 22:33:02
+CR116,Low,15,Normal Operations,0,3,0,1,56.5,0.821,72.5,2025-09-19 22:33:02
+CR117,Low,5,Normal Operations,0,2,0,2,43.6,0.818,57.3,2025-09-19 22:33:02
+CR118,High,45,Schedule Soon,2,2,0,2,48.9,0.719,48.6,2025-09-19 22:33:02
+CR119,Low,5,Normal Operations,0,2,0,2,43.2,0.782,71.7,2025-09-19 22:33:02
+CR120,Low,5,Normal Operations,0,2,0,1,49.6,0.866,78.1,2025-09-19 22:33:02
+CR121,Medium,30,Monitor,0,2,1,1,38.1,0.748,58.2,2025-09-19 22:33:02
+CR122,Low,15,Normal Operations,0,2,0,1,41.0,0.686,73.8,2025-09-19 22:33:02
+CR123,Low,15,Normal Operations,0,5,0,1,61.7,0.755,59.7,2025-09-19 22:33:02
+CR124,Low,5,Normal Operations,0,4,0,2,50.0,0.904,59.3,2025-09-19 22:33:02

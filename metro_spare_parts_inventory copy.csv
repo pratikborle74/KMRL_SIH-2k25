@@ -1,0 +1,51 @@
+Part_ID,Part_Name,Category,Metro_Line,Quantity_Available,Reorder_Level,Unit_Cost,Supplier_Name,Lead_Time_Days,Warehouse_ID,Location_Bin,Last_Used_Date,Usage_Count,Maintenance_Type,Last_Updated,Criticality_Level
+P001,HVAC Filter,Mechanical,Line 2,3,7,48169,UrbanRail Supplies,26,WH3,A19,2025-09-19,5,Corrective,2025-09-28,Medium
+P002,Gear Box,Electrical,Line 3,3,6,23586,UrbanRail Supplies,8,WH1,A13,2025-09-16,7,Emergency,2025-09-28,Low
+P003,Main Fuse,HVAC,Line 3,14,8,43561,TechnoRail India,29,WH3,D7,2025-09-03,23,Emergency,2025-09-28,High
+P004,Lighting Inverter,HVAC,Line 1,5,7,22507,RailTech Ltd,8,WH1,C13,2025-09-27,3,Emergency,2025-09-28,High
+P005,Cooling Pump,Mechanical,Line 3,17,7,43470,RailTech Ltd,15,WH2,E1,2025-08-07,15,Emergency,2025-09-28,Low
+P006,Wheel Axle,Electrical,Line 3,6,3,17761,ABC Spares,29,WH2,D8,2025-08-30,29,Preventive,2025-09-28,High
+P007,Cable Harness,Electrical,Line 3,9,9,36210,RailTech Ltd,19,WH2,B8,2025-08-13,23,Emergency,2025-09-28,High
+P008,Overhead Wire Clamp,Electrical,Line 1,20,8,3325,RailTech Ltd,28,WH1,B2,2025-07-31,9,Emergency,2025-09-28,Low
+P009,Traction Converter,Mechanical,Line 2,16,4,36331,UrbanRail Supplies,17,WH3,E8,2025-09-26,26,Corrective,2025-09-28,Medium
+P010,Exhaust Fan,Mechanical,Line 2,8,2,29119,TechnoRail India,20,WH2,C4,2025-08-03,28,Corrective,2025-09-28,Medium
+P011,Brake Disc,Electrical,Line 2,14,2,14749,RailTech Ltd,12,WH3,B13,2025-09-15,30,Corrective,2025-09-28,Low
+P012,Shock Absorber,Mechanical,Line 3,17,6,31210,MetroParts Co.,23,WH1,D16,2025-08-23,10,Corrective,2025-09-28,Medium
+P013,Voltage Regulator,Safety,Line 2,20,10,6034,MetroParts Co.,20,WH2,C5,2025-07-30,17,Preventive,2025-09-28,High
+P014,Exhaust Fan,Safety,Line 2,12,4,30134,RailTech Ltd,15,WH3,C19,2025-08-13,27,Preventive,2025-09-28,Medium
+P015,HVAC Filter,Electrical,Line 1,8,10,36508,TechnoRail India,20,WH1,B17,2025-08-30,2,Corrective,2025-09-28,High
+P016,Battery Pack,HVAC,Line 3,20,9,35938,UrbanRail Supplies,15,WH3,E19,2025-09-09,16,Corrective,2025-09-28,High
+P017,Control Unit PCB,Mechanical,Line 2,11,7,36115,TechnoRail India,29,WH2,C3,2025-08-19,1,Preventive,2025-09-28,Medium
+P018,Main Fuse,HVAC,Line 2,4,4,23957,MetroParts Co.,20,WH3,A17,2025-09-08,10,Corrective,2025-09-28,Low
+P019,Air Compressor,Safety,Line 1,0,5,23927,RailTech Ltd,23,WH2,E20,2025-08-13,19,Corrective,2025-09-28,High
+P020,Cable Harness,Electrical,Line 2,4,2,46167,UrbanRail Supplies,18,WH2,A18,2025-08-09,14,Preventive,2025-09-28,Low
+P021,Track Circuit Relay,Mechanical,Line 1,6,9,24280,MetroParts Co.,19,WH2,C18,2025-09-09,17,Emergency,2025-09-28,High
+P022,Driver Display Panel,HVAC,Line 2,4,5,7243,UrbanRail Supplies,30,WH3,B20,2025-09-20,8,Corrective,2025-09-28,Medium
+P023,Signal Processor,Mechanical,Line 3,16,8,4069,TechnoRail India,9,WH1,E10,2025-08-21,27,Corrective,2025-09-28,Low
+P024,Exhaust Fan,Safety,Line 3,13,5,30901,RailTech Ltd,4,WH1,E1,2025-08-26,0,Corrective,2025-09-28,Medium
+P025,Control Switch,HVAC,Line 1,14,9,1462,MetroParts Co.,13,WH1,B16,2025-08-20,9,Corrective,2025-09-28,Low
+P026,Circuit Breaker,Electrical,Line 1,12,2,27667,MetroParts Co.,5,WH3,D7,2025-08-06,18,Corrective,2025-09-28,High
+P027,Track Circuit Relay,Electrical,Line 2,17,7,11656,ABC Spares,14,WH3,E19,2025-09-10,5,Preventive,2025-09-28,Medium
+P028,Pantograph Shoe,HVAC,Line 3,2,6,31626,TechnoRail India,25,WH3,A4,2025-09-06,18,Emergency,2025-09-28,High
+P029,Control Unit PCB,Safety,Line 2,3,7,4460,MetroParts Co.,27,WH1,E16,2025-08-16,14,Emergency,2025-09-28,Medium
+P030,Horn Assembly,Safety,Line 1,8,6,42398,ABC Spares,15,WH2,D9,2025-09-04,18,Emergency,2025-09-28,Low
+P031,Rectifier Unit,HVAC,Line 3,9,2,44517,ABC Spares,25,WH3,A10,2025-09-02,24,Emergency,2025-09-28,High
+P032,Insulation Panel,Mechanical,Line 2,20,6,14624,UrbanRail Supplies,12,WH3,A16,2025-08-19,16,Corrective,2025-09-28,High
+P033,Cable Harness,Safety,Line 3,12,2,15821,MetroParts Co.,20,WH3,B6,2025-09-22,21,Corrective,2025-09-28,Low
+P034,Air Compressor,HVAC,Line 1,19,10,14457,MetroParts Co.,19,WH2,E10,2025-08-28,15,Preventive,2025-09-28,Medium
+P035,Battery Pack,Safety,Line 3,8,9,2315,MetroParts Co.,23,WH3,E15,2025-08-12,5,Emergency,2025-09-28,High
+P036,Coupling Rod,HVAC,Line 3,16,5,23402,ABC Spares,18,WH2,B8,2025-08-11,7,Emergency,2025-09-28,Medium
+P037,Coupling Rod,Safety,Line 1,19,8,1783,RailTech Ltd,9,WH2,A10,2025-09-07,15,Emergency,2025-09-28,Low
+P038,Pantograph Shoe,Electrical,Line 3,11,2,16610,UrbanRail Supplies,19,WH2,A11,2025-08-07,22,Emergency,2025-09-28,Medium
+P039,Suspension Spring,Safety,Line 3,2,9,10103,ABC Spares,28,WH3,A16,2025-08-16,22,Emergency,2025-09-28,Medium
+P040,Coupler,HVAC,Line 1,6,6,42774,ABC Spares,25,WH1,E16,2025-08-10,13,Preventive,2025-09-28,Low
+P041,Door Mechanism,HVAC,Line 2,12,5,10962,RailTech Ltd,29,WH3,D2,2025-09-18,22,Preventive,2025-09-28,High
+P042,Hydraulic Cylinder,Mechanical,Line 1,7,2,35860,ABC Spares,25,WH3,D19,2025-09-18,22,Corrective,2025-09-28,High
+P043,Circuit Breaker,HVAC,Line 2,12,6,38471,MetroParts Co.,24,WH3,B15,2025-08-05,21,Emergency,2025-09-28,Low
+P044,Insulation Panel,Electrical,Line 3,16,3,35795,RailTech Ltd,3,WH3,C18,2025-08-07,18,Preventive,2025-09-28,Low
+P045,Fire Extinguisher,HVAC,Line 1,10,9,36898,ABC Spares,30,WH3,B6,2025-08-01,13,Corrective,2025-09-28,Medium
+P046,Lighting Inverter,Mechanical,Line 2,18,5,13847,ABC Spares,11,WH2,C8,2025-08-28,12,Preventive,2025-09-28,Low
+P047,Hydraulic Cylinder,Electrical,Line 1,19,5,22387,RailTech Ltd,23,WH3,E17,2025-08-07,13,Corrective,2025-09-28,Medium
+P048,Transformer Unit,HVAC,Line 3,17,8,2832,MetroParts Co.,4,WH2,C5,2025-08-09,30,Corrective,2025-09-28,High
+P049,Control Unit PCB,Electrical,Line 2,15,5,47086,UrbanRail Supplies,18,WH1,D5,2025-08-15,22,Corrective,2025-09-28,Medium
+P050,Brake Disc,HVAC,Line 1,7,4,17419,TechnoRail India,26,WH2,D5,2025-09-23,15,Corrective,2025-09-28,High
